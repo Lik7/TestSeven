@@ -2,7 +2,7 @@ package base;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-public class Capabilities {
+public class Capabilities extends DesiredCapabilities {
     public final static String PLATFORM_NAME = "Android";
     public final static String APP_PACKAGE = "ru.s7.android";
     public final static String APP_ACTIVITY = "ru.s7.android.ui.SplashActivity";
@@ -11,6 +11,8 @@ public class Capabilities {
     public final static String NO_RESET = "true";
     public final static String PRINT_PAGE_SOURCE_ON_FIND_FAILLURE = "true";
     public final static String LAUNCH_TIMEOUT = "45000";
+    public final static String UNLOCK_TYPE = "pattern";
+    public final static String UNLOCK_KEY = "523698741";
 
 
     public DesiredCapabilities getCapabilities() {
@@ -26,7 +28,9 @@ public class Capabilities {
         capabilities.setCapability("fullReset", FULL_RESET);
         capabilities.setCapability("noReset", NO_RESET);
         capabilities.setCapability("printPageSourceOnFindFailure", PRINT_PAGE_SOURCE_ON_FIND_FAILLURE);
-        capabilities.setCapability("launchTimeout",LAUNCH_TIMEOUT);
+        capabilities.setCapability("launchTimeout", LAUNCH_TIMEOUT);
+        capabilities.setCapability("unlockType", UNLOCK_TYPE);
+        capabilities.setCapability("unlockKey", UNLOCK_KEY);
         return capabilities;
     }
 }

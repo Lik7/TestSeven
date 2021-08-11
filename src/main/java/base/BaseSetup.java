@@ -2,6 +2,7 @@ package base;
 
 import helpers.AllureScreenShooter;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -19,6 +20,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
+import static com.codeborne.selenide.Selenide.sleep;
+
 @Listeners(AllureScreenShooter.class)
 
 public class BaseSetup {
@@ -26,16 +29,25 @@ public class BaseSetup {
     //private AppiumDriver<MobileElement> driver;
     //private static URL url;
     //protected static HomeScreen homeScreen;
+    private static AppiumServer appiumServer = new AppiumServer();
 
     @BeforeClass
     public static AndroidDriver setUpDriver() {
-        //public void setUpDriver() {
+
         try {
+            //AppiumServer appiumServer = new AppiumServer();
+            //appiumServer.stopServer();
+
+            if (!appiumServer.serverIsRunning()) {
+                appiumServer.startServer();
+            } else {
+                System.out.println("Appium Server already running on Port: " + appiumServer.port);
+            }
+
             if (driver == null) {
                 //url = new URL("http://127.0.0.1:4723/wd/hub");
                 driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), new Capabilities().getCapabilities());
                 driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-                //homeScreen = new HomeScreen(driver);
             }
 
         } catch (MalformedURLException e) {
@@ -44,21 +56,17 @@ public class BaseSetup {
         return driver;
     }
 
-/*    @BeforeMethod
-    public void goHome() {
-        homeScreen = new HomeScreen(driver);
-        //driver.get(link);
-    }*/
-
     @AfterClass
     public void teardown() {
+        sleep(3000);
         driver.closeApp();
+        appiumServer.stopServer();
     }
 
     @AfterMethod
     public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
         if (testResult.getStatus() == ITestResult.FAILURE) {
-            DateFormat dateFormat = new SimpleDateFormat("HH_mm_ss");
+            DateFormat dateFormat = new SimpleDateFormat("dd_MM-HH_mm_ss");
             Calendar cal = Calendar.getInstance();
             File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(scrFile, new File("errorScreenshots\\" + testResult.getName() + "-"

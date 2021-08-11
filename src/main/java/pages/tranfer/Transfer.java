@@ -1,10 +1,13 @@
 package pages.tranfer;
 
+import helpers.HideKeyboardIfVisible;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
+import org.apache.logging.log4j.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -15,6 +18,10 @@ import static base.BaseSetup.setUpDriver;
 import static com.codeborne.selenide.Selenide.sleep;
 
 public class Transfer {
+    //private final Logger logger = LoggerFactory.getLogger(Transfer.class);//*****-----РАЗОБРАТЬСЯ КАК ИСПОЛЬЗОВАТЬ
+    static final Logger logger = LogManager.getLogger(Transfer.class);
+
+
     private AndroidDriver driver;
 
     public Transfer(AndroidDriver driver) {
@@ -25,7 +32,7 @@ public class Transfer {
 
 
     @AndroidFindBy(id = "ru.s7.android:id/etStartPlace")
-    private AndroidElement fromField;//поле Откуда на экране с картой
+    private MobileElement fromField;//поле Откуда на экране с картой
 
     @AndroidFindBy(id = "ru.s7.android:id/etFinishPlace")
     private AndroidElement whereField;//поле Куда на экране с картой
@@ -37,7 +44,7 @@ public class Transfer {
     private AndroidElement closeBtn;//кнопка Закрыть в блоке примера маршрута
 
     @AndroidFindBy(id = "ru.s7.android:id/etValue")
-    private List<AndroidElement> searchField;//поля поиска в мод, окне ввода адреса
+    private List<AndroidElement> searchField;//поля поиска в окне ввода адреса
 
     @AndroidFindBy(xpath = "//android.view.View[@content-desc='Карта Google']/android.view.View")
     private List<AndroidElement> pingsOnMap;//кол-во пингов на карте
@@ -47,9 +54,11 @@ public class Transfer {
 
     private boolean isKeyboardShown;
 
+    HideKeyboardIfVisible hideKeyboardIfVisible = new HideKeyboardIfVisible();
+
     @Step("Нажимаю кнопку Выбрать трансфер в окне описания трансфера")
     public void clickSelectTransferBtn() {
-
+        logger.info("Start method clickSelectTransferBtn");
         if (searchTransferBtn.isDisplayed()) {
             searchTransferBtn.click();
         }
@@ -73,7 +82,7 @@ public class Transfer {
         searchField.get(0).clear();
         searchField.get(0).sendKeys(fromValue);
         //driver.navigate().back();
-        hideKeyboardIfVisible();
+        hideKeyboardIfVisible.hideKeyboardIfVisible();
         WebElement pointFromField = driver.findElement(By.xpath("//android.widget.TextView[@text=\"Pulkovo Airport (LED)\"]"));
         pointFromField.click();
     }
@@ -82,7 +91,7 @@ public class Transfer {
     public void enterWhereField(String whereValue) {
         searchField.get(1).sendKeys(whereValue);
         //driver.navigate().back();
-        hideKeyboardIfVisible();
+        hideKeyboardIfVisible.hideKeyboardIfVisible();
         WebElement pointWhereField = driver.findElement(By.xpath("//android.widget.TextView[@text=\"Nevsky prospect\"]"));
         pointWhereField.click();
     }
@@ -90,20 +99,20 @@ public class Transfer {
     @Step("Количество пингов на карте")
     public int getCountOfPingsOnMap() {
         //if нужен для ожидания отработки анимации
-        if (pingsOnMap.size()!=2){
-            sleep(3000);
+        if (pingsOnMap.size() != 2) {
+            sleep(2000);
         }
         return pingsOnMap.size();
     }
 
     //метод закрывает клавиатуру если она открыта
-    private void hideKeyboardIfVisible() {
+   /* private void hideKeyboardIfVisible() {
         isKeyboardShown = driver.isKeyboardShown();
         if (isKeyboardShown = true) {
             //driver.navigate().back();
             driver.hideKeyboard();
         }
-    }
+    }*/
 
 
 /* @FindBy(how=How.NAME, using="username")

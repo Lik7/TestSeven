@@ -1,6 +1,8 @@
 package pages.rentalCar;
 
+import helpers.DateHelpers;
 import helpers.HideKeyboardIfVisible;
+import helpers.Waits;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -12,17 +14,19 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoField;
 import java.util.Calendar;
 import java.util.List;
 
-import static base.BaseSetup.setUpDriver;
+//import static base.BaseTest.setUpDriver;
 
-public class RentalCar {
+public class RentalCarScreen {
 
     private AndroidDriver driver;
 
-    public RentalCar(AndroidDriver driver) {
-        this.driver = setUpDriver();
+    public RentalCarScreen(AndroidDriver driver) {
+        //this.driver = setUpDriver();
+        this.driver = driver;
         //PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(3)), this);
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
@@ -46,7 +50,10 @@ public class RentalCar {
     private List<MobileElement> slidersReceiptReturn;//слайдеры времени на экране календаря
 
     @AndroidFindBy(id = "ru.s7.android:id/btnSave")
-    private MobileElement selectBtn;
+    private MobileElement selectBtn;//Кнопка Выбрать в календаре
+
+    @AndroidFindBy(id = "ru.s7.android:id/rlBackground")
+    private MobileElement searchBtn;//Кнопка Найти на экране формы аренды авто
 
     @AndroidFindBy(id = "ru.s7.android:id/tvPickUpDate")
     private MobileElement selectedReceiptDate;//для проверки: выбранная дата получения
@@ -60,7 +67,7 @@ public class RentalCar {
     @AndroidFindBy(id = "ru.s7.android:id/tvDropOfTime")
     private MobileElement selectedReturnTime;//для проверки: выбранное время возврата
 
-    private int todayDayInt;
+    private int todayDayInt = java.time.LocalDate.now().get(ChronoField.DAY_OF_MONTH);
     //private String todayDayString = Integer.toString(todayDayInt);
 
     HideKeyboardIfVisible hideKeyboardIfVisible = new HideKeyboardIfVisible();
@@ -83,11 +90,14 @@ public class RentalCar {
     @Step("Тап в поле Дата получения")
     public void clickDateOfReceiptField() {
         dateOfReceiptField.click();
+        //slidersReceiptReturn.get(0).isDisplayed();//тоже рабочий вариант
+        Waits waits = new Waits();
+        waits.waitForElementPresent(By.id("ru.s7.android:id/seekBar"), 5);
     }
 
     @Step("Выбор даты получения")
     public void selectDateReceiptOfCar() {
-        getTodayDateDay();
+        //getTodayDateDay();
         String todayDayString = Integer.toString(todayDayInt);
         //System.out.println("todayDayInt:" + todayDayInt);
         //System.out.println("todayDayString:" + todayDayString);
@@ -96,13 +106,9 @@ public class RentalCar {
     }
 
     @Step("Выбор даты возврата")
-    public void selectDateReturnOfCar() {
-        int daysInCurrentMonth = java.time.LocalDate.now().lengthOfMonth();//кол-во дней в тек. месяце
-        getTodayDateDay();
-        if (todayDayInt == daysInCurrentMonth) {
-            todayDayInt = 1;
-        } else todayDayInt += 1;
-        String todayDayString = Integer.toString(todayDayInt);
+    public void selectDateReturnOfCar(Integer n) {
+        DateHelpers dateHelpers = new DateHelpers();
+        String todayDayString = Integer.toString(dateHelpers.getDayOfMonthTodayPlusNDays(n));
         WebElement finishDate = driver.findElement(By.xpath("//android.widget.TextView[@text=" + "'" + todayDayString + "'" + "]"));
         finishDate.click();
     }
@@ -113,8 +119,14 @@ public class RentalCar {
     }
 
     @Step("Нажимаю кнопку Выбрать в календаре")
-    public void clickSelectBtn(){
+    public void clickSelectBtn() {
         selectBtn.click();
+    }
+
+    @Step("Нажимаю кнопку Найти на экране формы аренды авто")
+    public BuyOrBookCarScreen clickSearchBtn() {
+        searchBtn.click();
+        return new BuyOrBookCarScreen(driver);
     }
 
     public String getSelectedReceiptDate() {
@@ -135,13 +147,6 @@ public class RentalCar {
 
     public String getPlaceOfReceiptField() {
         return placeOfReceiptField.getText();
-    }
-
-
-    private Integer getTodayDateDay() {
-        DateFormat dateFormat = new SimpleDateFormat("d");
-        Calendar cal = Calendar.getInstance();
-        return todayDayInt = Integer.parseInt(dateFormat.format(cal.getTime()));
     }
 
 }

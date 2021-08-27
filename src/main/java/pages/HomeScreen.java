@@ -1,41 +1,28 @@
 package pages;
 
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import pages.menu.Sidebar;
 
-import static base.BaseSetup.setUpDriver;
 
 public class HomeScreen {
-    //private AndroidDriver driver;
-    private AndroidDriver driver = setUpDriver();
+    private AndroidDriver driver;
 
-/*    public HomeScreen(AndroidDriver driver) {
+    public HomeScreen(AndroidDriver driver) {
         this.driver = driver;
-    }*/
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    }
 
-    //driver = new BaseSetup().setUpDriver();
-    /*public LogIn(AndroidDriver driver) {
-        this.driver = driver;
-    }*/
+    @AndroidFindBy(className = "android.widget.ImageButton")
+    private MobileElement menuBtn;//кнопка Меню
 
-    //private WebElement enterBtn = driver.findElement(By.xpath("//android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView"));
-    //private WebElement enterBtn = driver.findElement(By.id("ru.s7.android:id/btnProfile"));//кнопка Войти
-    private WebElement menuBtn = driver.findElement(By.className("android.widget.ImageButton"));//кнопка Меню
-
-        @Step("Нажимаю кнопку Боковое меню")
-        public void clickMenuBtn() {
-            menuBtn.click();
-        }
-/*    @Step("Нажимаю кнопку Боковое меню")
+    @Step("Нажимаю кнопку Боковое меню")
     public Sidebar clickMenuBtn() {
         menuBtn.click();
         return new Sidebar(driver);
-    }*/
-
-    public AndroidDriver getDriver() {
-        return driver;
     }
 }

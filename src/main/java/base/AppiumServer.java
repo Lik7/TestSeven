@@ -13,12 +13,20 @@ public class AppiumServer {
     //private AppiumDriverLocalService service;
     private AppiumServiceBuilder builder;
     //private DesiredCapabilities cap;
-    private AppiumDriverLocalService service = AppiumDriverLocalService.buildDefaultService();
+    private static AppiumDriverLocalService service = AppiumDriverLocalService.buildDefaultService();
 
-    public int port = 4723;
+    public static int port = 4723;
 
 
-    public void startServer() {
+    public static void startServer() {
+
+        if (!serverIsRunning()) {
+            //appiumServer.startServer();
+            service.start();
+        } else {
+            System.out.println("Appium Server already running on Port: " + port);
+            //appiumServer.stopServer();
+        }
         /*Capabilities cap = new Capabilities();
         cap.setCapability("noReset", "false");
 
@@ -35,17 +43,15 @@ public class AppiumServer {
         // Start the server with the builder
         //service = AppiumDriverLocalService.buildDefaultService();
         //service = AppiumDriverLocalService.buildService(builder);
-
-        service.start();
     }
 
 
-    public void stopServer() {
+    public static void stopServer() {
         service.stop();
     }
 
 
-    public boolean serverIsRunning() {
+    public static boolean serverIsRunning() {
 
         boolean isServerRunning = false;
         ServerSocket serverSocket;

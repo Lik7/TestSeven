@@ -1,10 +1,12 @@
 package helpers;
 
-import base.BaseSetup;
+import base.BaseTest;
+import base.Driver;
 import io.appium.java_client.android.AndroidDriver;
 
 public class HideKeyboardIfVisible {
-    private AndroidDriver driver= BaseSetup.setUpDriver();
+    //private AndroidDriver driver= BaseTest.setUpDriver();
+    private AndroidDriver driver = Driver.getDriver();
 
     private boolean isKeyboardShown;
 

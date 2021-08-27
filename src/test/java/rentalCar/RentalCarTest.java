@@ -1,19 +1,19 @@
 package rentalCar;
 
-import base.BaseSetup;
+import base.BaseTest;
+import helpers.Swipes;
 import org.assertj.core.api.SoftAssertions;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.HomeScreen;
 import pages.menu.Sidebar;
-import pages.rentalCar.RentalCar;
+import pages.rentalCar.BuyOrBookCarScreen;
+import pages.rentalCar.RentalCarScreen;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 //Использовал AssertJ для нескольких проверок в одном тесте
-public class RentalCarTest extends BaseSetup {
+
+public class RentalCarTest extends BaseTest {
 
     String location = "Пулково";
     String selectedReceiptDate;//дата получения
@@ -21,22 +21,25 @@ public class RentalCarTest extends BaseSetup {
     String addTimeOfReceipt = "35";
     String selectedReturnDate;//дата возврата
     String selectedReturnTime = "12:00";//время возврата
+    int amountOfRentalDays = 3;//на сколько дней арендуется авто
 
-    @Test
+    @Test (description = "Проверяем заполнение формы для аренды авто")
     public void rentalCarTest() {
-        HomeScreen homeScreen = new HomeScreen();
-        homeScreen.clickMenuBtn();//нажимаю кнопку Меню
-        Sidebar sidebar = new Sidebar();
-        sidebar.clickMenuAutoBtn();//нажимаю кнопку Меню - Авто
-        RentalCar rentalCar = new RentalCar(BaseSetup.setUpDriver());
+
+        Sidebar sidebar = homeScreen.clickMenuBtn();
+        RentalCarScreen rentalCar = sidebar.clickMenuAutoBtn();
         rentalCar.clickPlaceOfReceiptField();//тап в поле Место получения
         rentalCar.enterFromLocation(location);//ввод локации откуда
         rentalCar.clickDateOfReceiptField();//тап в поле Дата получения
+
+        Swipes swipes= new Swipes();//ЗАМЕНИТЬ НА СВАЙП ДО ЭЛЕМЕНТА
+        swipes.swipe(300, 0.65, 0.4);
+
         rentalCar.selectDateReceiptOfCar();//установка даты получения
-        rentalCar.selectDateReturnOfCar();//установка даты возврата
+        rentalCar.selectDateReturnOfCar(amountOfRentalDays);//установка даты возврата
         rentalCar.setTimeOfReceipt(addTimeOfReceipt);//установка времени возврата
         rentalCar.clickSelectBtn();//нажать кнопку Выбрать в календаре
-        addRentalPeriod();
+        addRentalPeriod(amountOfRentalDays);
 
         SoftAssertions softAsserts = new SoftAssertions();
         softAsserts.assertThat(rentalCar.getPlaceOfReceiptField())
@@ -54,24 +57,28 @@ public class RentalCarTest extends BaseSetup {
         softAsserts.assertThat(rentalCar.getSelectedReturnTime())
                 .withFailMessage("Ошибка в времени возврата:\nact: " + rentalCar.getSelectedReturnTime() + " \nexp: " + selectedReturnTime)
                 .isEqualTo(selectedReturnTime);
+        //softAsserts.assertAll();
+
+        BuyOrBookCarScreen buyOrBookCarScreen = rentalCar.clickSearchBtn();//нажимаю кнопку Найти в форме аренды авто
+        softAsserts.assertThat(buyOrBookCarScreen.getTitleName())
+                .withFailMessage("Ошибка в названии экрана:\nact: " + buyOrBookCarScreen.getTitleName() + " \nexp: " + "Купить или забронировать")
+                .isEqualTo("Купить или забронировать");
+        softAsserts.assertThat(buyOrBookCarScreen.getNameOfBlockSelectionCar())
+                .withFailMessage("Ошибка в названии блока выбора авто:\nact: " + buyOrBookCarScreen.getNameOfBlockSelectionCar() + " \nexp: " + "Выбор авто")
+                .isEqualTo("Выбор авто");
         softAsserts.assertAll();
-/*        Assert.assertEquals(rentalCar.getPlaceOfReceiptField(), location, "Ошибка в локации");
-        Assert.assertEquals(rentalCar.getSelectedReceiptDate().replace("\u00A0", " "), selectedReceiptDate, "Ошибка в дате получения");
-        Assert.assertEquals(rentalCar.getSelectedReceiptTime(), selectedReceiptTime, "Ошибка в времени получения");
-        Assert.assertEquals(rentalCar.getSelectedReturnDate().replace("\u00A0", " "), selectedReturnDate, "Ошибка в дате возврата");
-        Assert.assertEquals(rentalCar.getSelectedReturnTime(), selectedReturnTime, "Ошибка в времени возврата");*/
+
     }
 
     //метод задает даты (сегодня и завтра) получения и возврата авто для проверки в assert
-    private void addRentalPeriod() {
-        DateFormat dateFormat = new SimpleDateFormat("dd MMM, E");
-        Calendar cal = Calendar.getInstance();
-        String todayDate = dateFormat.format(cal.getTime());
-        System.out.println(todayDate);
-        selectedReceiptDate = todayDate;
-        cal.add(Calendar.DATE, +1);
-        System.out.println(dateFormat.format(cal.getTime()));
-        selectedReturnDate = dateFormat.format(cal.getTime());
-    }
+    private void addRentalPeriod(Integer amountOfRentalDays) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, E");
+        LocalDateTime dateTime = LocalDateTime.now();
 
+        selectedReceiptDate = dateTime.format(formatter);
+        System.out.println("Test - " + selectedReceiptDate);
+
+        selectedReturnDate = dateTime.plusDays(amountOfRentalDays).format(formatter);
+        System.out.println("Test - " + selectedReturnDate);
+    }
 }

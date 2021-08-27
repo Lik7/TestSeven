@@ -1,8 +1,3 @@
-import base.BaseSetup;
-import org.testng.annotations.Test;
-import pages.Enter;
-import pages.HomeScreen;
-
 public class Start {
 
    /* @Test

@@ -1,33 +1,42 @@
 package pages.menu;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import pages.rentalCar.RentalCarScreen;
+import pages.tranfer.TransferScreen;
 
-import static base.BaseSetup.setUpDriver;
 
 public class Sidebar {
-    //private AndroidDriver driver;
-    private AndroidDriver driver = setUpDriver();
+    private AndroidDriver driver;
 
-    private WebElement menuTransferBtn = driver.findElement(MobileBy.id("ru.s7.android:id/navTransfer"));//кнопка Меню - трансфер
-    private WebElement menuAutoBtn = driver.findElement(MobileBy.id("ru.s7.android:id/navAuto"));//кнопка Меню - авто
+    @AndroidFindBy(id = "ru.s7.android:id/navTransfer")
+    private MobileElement menuTransferBtn;//кнопка Меню - трансфер
 
-    @Step ("Нажимаю кнопку Трансфер в боковом меню")
-    public void clickMenuTransferBtn(){
+    @AndroidFindBy(id = "ru.s7.android:id/navAuto")
+    private MobileElement menuAutoBtn;//кнопка Меню - авто
+
+    public Sidebar(AndroidDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    }
+
+    /*public Sidebar(AndroidDriver driver) {
+        this.driver = driver;
+    }*/
+
+    @Step("Нажимаю кнопку Трансфер в боковом меню")
+    public TransferScreen clickMenuTransferBtn() {
         menuTransferBtn.click();
+        return new TransferScreen(driver);
     }
 
-    @Step ("Нажимаю кнопку Трансфер в боковом меню")
-    public void clickMenuAutoBtn(){
+    @Step("Нажимаю кнопку Авто в боковом меню")
+    public RentalCarScreen clickMenuAutoBtn() {
         menuAutoBtn.click();
-    }
-
-    public AppiumDriver<MobileElement> getDriver() {
-        return driver;
+        return new RentalCarScreen(driver);
     }
 }

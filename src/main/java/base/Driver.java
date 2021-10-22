@@ -17,7 +17,7 @@ public class Driver {
             if (driver == null) {
                 //url = new URL("http://127.0.0.1:4723/wd/hub");
                 driver = new AndroidDriver(new URL(url), new Capabilities().getCapabilities());
-                driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+                driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
             }
         } catch (
                 MalformedURLException e) {

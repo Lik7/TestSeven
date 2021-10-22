@@ -8,6 +8,8 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.support.PageFactory;
 import pages.menu.Sidebar;
 
+import static java.lang.Thread.sleep;
+
 
 public class HomeScreen {
     private AndroidDriver driver;
@@ -22,6 +24,16 @@ public class HomeScreen {
 
     @Step("Нажимаю кнопку Боковое меню")
     public Sidebar clickMenuBtn() {
+      /*  try {
+            sleep(15000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        boolean b = menuBtn.isDisplayed();
+        System.out.println(b);
+        if(!menuBtn.isDisplayed()){
+            driver.navigate().back();
+        }*/
         menuBtn.click();
         return new Sidebar(driver);
     }

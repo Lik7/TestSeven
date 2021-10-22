@@ -1,7 +1,7 @@
 package helpers;
 
-import base.BaseTest;
 import base.Driver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
@@ -10,7 +10,6 @@ import org.openqa.selenium.Dimension;
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.PointOption.point;
 import static java.time.Duration.ofMillis;
-import static com.codeborne.selenide.Selenide.sleep;
 
 
 public class Swipes {
@@ -28,7 +27,7 @@ public class Swipes {
         action.press(point(x, start_Y))
                 .waitAction(waitOptions(ofMillis(timeOfSwipe)))
                 .moveTo(point(x, end_Y))
-                .waitAction(waitOptions(ofMillis(timeOfSwipe)))
+               // .waitAction(waitOptions(ofMillis(timeOfSwipe)))
                 .release()
                 .perform();
     }
@@ -66,7 +65,7 @@ public class Swipes {
     //Свайп до элемента
     public void swipeUpToElement(By by, int maxSwipes, double startPoint, double endPoint) {
         int alreadySwiped = 0;//Кол-во сделанных свайпов
-        while (driver.findElements(by).size() == 0) {
+        while (countElementsBy(by) == 0) {
             if (alreadySwiped > maxSwipes) {
                 waits.waitForElementPresent(by, 1);
                 return;
@@ -75,4 +74,51 @@ public class Swipes {
             ++alreadySwiped;
         }
     }
+
+    public void swipeUpToElement(By by, int maxSwipes, int timeOfSwipe, double startPoint, double endPoint) {
+        int alreadySwiped = 0;//Кол-во сделанных свайпов
+        while (countElementsBy(by) == 0) {
+            if (alreadySwiped > maxSwipes) {
+                waits.waitForElementPresent(by, 1);
+                return;
+            }
+            swipe(timeOfSwipe, startPoint, endPoint);
+            ++alreadySwiped;
+        }
+    }
+
+    public void swipeUpToElement(String xPathLocator, int maxSwipes, int timeOfSwipe, double startPoint, double endPoint) {
+        int alreadySwiped = 0;//Кол-во сделанных свайпов
+        while (countElementsXPathLocator(xPathLocator) == 0) {
+            if (alreadySwiped > maxSwipes) {
+                waits.waitForElementPresent(By.xpath(xPathLocator), 1);
+                return;
+            }
+            swipe(timeOfSwipe, startPoint, endPoint);
+            ++alreadySwiped;
+        }
+    }
+
+    public void swipeUpToElement(String xPathLocator) {
+        int alreadySwiped = 0;//Кол-во сделанных свайпов
+        int maxSwipes = 10;
+//        int i = countElementsXPathLocator(xPathLocator);
+        while (countElementsXPathLocator(xPathLocator) == 0) {
+            if (alreadySwiped > maxSwipes) {
+                waits.waitForElementPresent(By.xpath(xPathLocator), 1);
+                return;
+            }
+            swipe(300, 0.7, 0.5);
+            ++alreadySwiped;
+        }
+    }
+
+    private int countElementsBy (By by){
+        return driver.findElements(by).size();
+    }
+
+    private int countElementsXPathLocator (String xPathLocator){
+        return driver.findElements(By.xpath(xPathLocator)).size();
+    }
+
 }

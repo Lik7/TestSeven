@@ -18,10 +18,11 @@ public class Capabilities extends DesiredCapabilities {
     public DesiredCapabilities getCapabilities() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
-        capabilities.setCapability("deviceName", "meizu");
+        //capabilities.setCapability("deviceName", "meizu");
         capabilities.setCapability("platformName", PLATFORM_NAME);
         capabilities.setCapability("platformVersion", "8.1.0");
         //capabilities.setCapability("udid", "818HGBTP2245L");
+        capabilities.setCapability("udid", "ENU7N15B06000502");
         capabilities.setCapability("appPackage", APP_PACKAGE);
         capabilities.setCapability("appActivity", APP_ACTIVITY);
         capabilities.setCapability("appWaitActivity", APP_WAIT_ACTIVITY);

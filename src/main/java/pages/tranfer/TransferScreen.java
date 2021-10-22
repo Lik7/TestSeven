@@ -18,6 +18,7 @@ import java.util.List;
 
 //import static base.BaseTest.setUpDriver;
 import static com.codeborne.selenide.Selenide.sleep;
+//прикрутил "свободный интерфейс" (цепочка методов)
 @Listeners(AllureScreenShooter.class)
 
 
@@ -61,43 +62,52 @@ public class TransferScreen {
     HideKeyboardIfVisible hideKeyboardIfVisible = new HideKeyboardIfVisible();
 
     @Step("Нажимаю кнопку Выбрать трансфер в окне описания трансфера")
-    public void clickSelectTransferBtn() {
+    public TransferScreen clickSelectTransferBtn() {
         logger.info("Start method clickSelectTransferBtn");
         if (searchTransferBtn.isDisplayed()) {
             searchTransferBtn.click();
         }
+        return this;
     }
 
     @Step("Тап в поле Откуда")
-    public void clickInFromField() {
+    public TransferScreen clickInFromField() {
         if (closeBtn.isDisplayed()) {
             closeBtn.click();//закрываем ИнфоБлок над блоком откуда\куда
         }
         fromField.click();
+        return this;
     }
 
     @Step("Тап в поле Куда")
-    public void clickInWhereField() {
+    public TransferScreen clickInWhereField() {
         whereField.click();
+        return this;
     }
 
     @Step("Заполняю поле Откуда")
-    public void enterFromField(String fromValue) {
-        searchField.get(0).clear();
+    public TransferScreen enterFromField(String fromValue) {
+        String str = searchField.get(0).getText();
+        System.out.println("searchField.get(0):" + searchField.get(0).getText());
+        if (!str.isEmpty()) {
+            searchField.get(0).clear();
+        }
         searchField.get(0).sendKeys(fromValue);
         //driver.navigate().back();
         hideKeyboardIfVisible.hideKeyboardIfVisible();
         WebElement pointFromField = driver.findElement(By.xpath("//android.widget.TextView[@text=\"Pulkovo Airport (LED)\"]"));
         pointFromField.click();
+        return this;
     }
 
     @Step("Заполняю поле Куда")
-    public void enterWhereField(String whereValue) {
+    public TransferScreen enterWhereField(String whereValue) {
         searchField.get(1).sendKeys(whereValue);
         //driver.navigate().back();
         hideKeyboardIfVisible.hideKeyboardIfVisible();
         WebElement pointWhereField = driver.findElement(By.xpath("//android.widget.TextView[@text=\"Nevsky prospect\"]"));
         pointWhereField.click();
+        return this;
     }
 
     @Step("Количество пингов на карте")

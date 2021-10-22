@@ -2,9 +2,7 @@ package base;
 
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
-import io.appium.java_client.service.local.flags.GeneralServerFlag;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 
@@ -13,7 +11,7 @@ public class AppiumServer {
     //private AppiumDriverLocalService service;
     private AppiumServiceBuilder builder;
     //private DesiredCapabilities cap;
-    private static AppiumDriverLocalService service = AppiumDriverLocalService.buildDefaultService();
+    private static AppiumDriverLocalService appiumService = AppiumDriverLocalService.buildDefaultService();
 
     public static int port = 4723;
 
@@ -21,8 +19,11 @@ public class AppiumServer {
     public static void startServer() {
 
         if (!serverIsRunning()) {
+            boolean servIsRun = serverIsRunning();
+            System.out.println("AppiumServer is running: " + servIsRun);
             //appiumServer.startServer();
-            service.start();
+            appiumService.start();
+            System.out.println("AppiumServer started on port: " + port);
         } else {
             System.out.println("Appium Server already running on Port: " + port);
             //appiumServer.stopServer();
@@ -47,7 +48,10 @@ public class AppiumServer {
 
 
     public static void stopServer() {
-        service.stop();
+        boolean servIsRun = serverIsRunning();
+        System.out.println("AppiumServer is running: " + servIsRun);
+        appiumService.stop();
+        System.out.println("AppiumServer stopped");
     }
 
 
@@ -65,5 +69,27 @@ public class AppiumServer {
             serverSocket = null;
         }
         return isServerRunning;
+    }
+
+    //Запуск сервера через командную строку
+    public void startServerCMD() {
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            runtime.exec("cmd.exe /c start cmd.exe /k \"appium -a 127.0.0.1 -p 4723\"");
+            Thread.sleep(8000);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Остановка серевера через командную строку
+    public void stopServerCMD() {
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            runtime.exec("taskkill /F /IM node.exe");
+            runtime.exec("taskkill /F /IM cmd.exe");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

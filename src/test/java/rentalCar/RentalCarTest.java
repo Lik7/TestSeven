@@ -1,8 +1,8 @@
 package rentalCar;
 
 import base.BaseTest;
-import helpers.Swipes;
 import org.assertj.core.api.SoftAssertions;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.menu.Sidebar;
 import pages.rentalCar.BuyOrBookCarScreen;
@@ -31,10 +31,6 @@ public class RentalCarTest extends BaseTest {
         rentalCar.clickPlaceOfReceiptField();//тап в поле Место получения
         rentalCar.enterFromLocation(location);//ввод локации откуда
         rentalCar.clickDateOfReceiptField();//тап в поле Дата получения
-
-        Swipes swipes= new Swipes();//ЗАМЕНИТЬ НА СВАЙП ДО ЭЛЕМЕНТА
-        swipes.swipe(300, 0.65, 0.4);
-
         rentalCar.selectDateReceiptOfCar();//установка даты получения
         rentalCar.selectDateReturnOfCar(amountOfRentalDays);//установка даты возврата
         rentalCar.setTimeOfReceipt(addTimeOfReceipt);//установка времени возврата
@@ -70,15 +66,24 @@ public class RentalCarTest extends BaseTest {
 
     }
 
+    @Test(description = "Проверяем сообщение в календаре если не выбрана дата")
+    public void messageDateNotSelectedTest(){
+        Sidebar sidebar = homeScreen.clickMenuBtn();
+        RentalCarScreen rentalCar = sidebar.clickMenuAutoBtn();
+        rentalCar.clickDateOfReceiptField();//тап в поле Дата получения
+        rentalCar.clickSelectBtn();//нажать кнопку Выбрать в календаре
+        Assert.assertEquals(rentalCar.checkMessageDateNotSelected(), true, "Сообщение, что дата не выбрана не отображается");
+    }
+
     //метод задает даты (сегодня и завтра) получения и возврата авто для проверки в assert
     private void addRentalPeriod(Integer amountOfRentalDays) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, E");
-        LocalDateTime dateTime = LocalDateTime.now();
+        LocalDateTime dateTime = LocalDateTime.now();// сегодня
 
         selectedReceiptDate = dateTime.format(formatter);
-        System.out.println("Test - " + selectedReceiptDate);
+        System.out.println("Test - дата получения " + selectedReceiptDate);
 
         selectedReturnDate = dateTime.plusDays(amountOfRentalDays).format(formatter);
-        System.out.println("Test - " + selectedReturnDate);
+        System.out.println("Test - дата возврата " + selectedReturnDate);
     }
 }

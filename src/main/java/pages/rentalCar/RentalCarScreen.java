@@ -1,7 +1,8 @@
 package pages.rentalCar;
 
-import helpers.DateHelpers;
+import helpers.DateSelected;
 import helpers.HideKeyboardIfVisible;
+import helpers.Swipes;
 import helpers.Waits;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -12,10 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.temporal.ChronoField;
-import java.util.Calendar;
 import java.util.List;
 
 //import static base.BaseTest.setUpDriver;
@@ -67,10 +65,14 @@ public class RentalCarScreen {
     @AndroidFindBy(id = "ru.s7.android:id/tvDropOfTime")
     private MobileElement selectedReturnTime;//для проверки: выбранное время возврата
 
-    private int todayDayInt = java.time.LocalDate.now().get(ChronoField.DAY_OF_MONTH);
-    //private String todayDayString = Integer.toString(todayDayInt);
+    @AndroidFindBy(id = "ru.s7.android:id/message")
+    private MobileElement messageDateNotSelected;//для проверки: выбранное время возврата
+
+    private int todayDayInt = java.time.LocalDate.now().get(ChronoField.DAY_OF_MONTH); // число сегодня в int
 
     HideKeyboardIfVisible hideKeyboardIfVisible = new HideKeyboardIfVisible();
+    Swipes swipe = new Swipes();
+    DateSelected dateSelected = new DateSelected();
 
     @Step("Тап в поле Место получения")
     public void clickPlaceOfReceiptField() {
@@ -97,26 +99,24 @@ public class RentalCarScreen {
 
     @Step("Выбор даты получения")
     public void selectDateReceiptOfCar() {
-        //getTodayDateDay();
-        String todayDayString = Integer.toString(todayDayInt);
-        //System.out.println("todayDayInt:" + todayDayInt);
-        //System.out.println("todayDayString:" + todayDayString);
-        WebElement startDate = driver.findElement(By.xpath("//android.widget.TextView[@text=" + "'" + todayDayString + "'" + "]"));
-        startDate.click();
+        dateSelected.tapDayStartInCalendar(0);
     }
 
     @Step("Выбор даты возврата")
     public void selectDateReturnOfCar(Integer n) {
-        DateHelpers dateHelpers = new DateHelpers();
-        String todayDayString = Integer.toString(dateHelpers.getDayOfMonthTodayPlusNDays(n));
-        WebElement finishDate = driver.findElement(By.xpath("//android.widget.TextView[@text=" + "'" + todayDayString + "'" + "]"));
-        finishDate.click();
+        dateSelected.tapDayFinishInCalendar(n);
     }
 
     @Step("Ввод времени получения")
     public void setTimeOfReceipt(String time) {
         slidersReceiptReturn.get(0).sendKeys(time);
     }
+
+    @Step("Проверка отображения поп-ап, что дата не выбрана")
+    public boolean checkMessageDateNotSelected() {
+        return messageDateNotSelected.isDisplayed();
+    }
+
 
     @Step("Нажимаю кнопку Выбрать в календаре")
     public void clickSelectBtn() {

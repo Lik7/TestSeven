@@ -1,28 +1,19 @@
-import base.AppiumServer;
-import enums.AirportData;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.*;
-import java.util.*;
-import java.util.stream.Collectors;
+import enums.Dates;
 
 public class ForTestMethods {
 
 
-   // public static void main(String[] args) {
-        //System.out.println(Color.RED.getCode());        // #FF0000
-        //System.out.println(Color.GREEN.getCode());      // #00FF00
+    public static void main(String[] args) {
+        Dates d = Dates.DAYS;
+       // d.startToday();
         //AppiumServer ap = new AppiumServer();
         //ap.startServer();
         // ap.stopServer();
         /*AirportData AD = AirportData.LED;
         System.out.println(AD.getCity() + AD.getNameEN());
-        AppiumServer.stopServer();*/
+        AppiumServer.stopServer();
 
-    public static void main(String[] args) throws InterruptedException {
+    /*public static void main(String[] args) throws InterruptedException {
         AppiumServer appiumServer = new AppiumServer();
         appiumServer.startServer();
         Thread.sleep(5000);
@@ -31,8 +22,8 @@ public class ForTestMethods {
         System.out.println("appium Server Stopped");
 
 
-    }
-    }
+    }*/
+    }}
 
 
 

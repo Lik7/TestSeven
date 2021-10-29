@@ -1,6 +1,7 @@
 package helpers;
 
 import base.Driver;
+import enums.Dates;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -33,7 +34,7 @@ public class DateSelected {
         String xPathLocator = "//android.widget.TextView[@text=" + "'" + todayDayString + "'" + "]";
         swipe.swipeUpToElement(xPathLocator, 3, 300, 0.65, 0.4);
         WebElement finishDate = driver.findElement(By.xpath(xPathLocator));
-        if (!finishDate.isDisplayed()) {
+        if (!finishDate.isDisplayed()||!finishDate.isSelected()) {
             swipe.swipe(300, 0.65, 0.4);
         }
         finishDate.click();

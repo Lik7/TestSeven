@@ -13,7 +13,6 @@ import static java.time.Duration.ofMillis;
 
 
 public class Swipes {
-    //    private AndroidDriver driver = BaseTest.setUpDriver();
     private AndroidDriver driver = Driver.getDriver();
     Waits waits = new Waits();
 
@@ -22,8 +21,8 @@ public class Swipes {
         TouchAction action = new TouchAction(driver);
         Dimension sizeScreen = driver.manage().window().getSize();//Получаем размер экрана
         int x = sizeScreen.width / 2;
-        int start_Y = (int) (sizeScreen.height * startPoint); //Нач. точка в %-х экрана вниз
-        int end_Y = (int) (sizeScreen.height * endPoint); //Конечн. точка в %-х экрана вниз
+        int start_Y = (int) (sizeScreen.height * startPoint); //Нач. точка в %-х экрана
+        int end_Y = (int) (sizeScreen.height * endPoint); //Конечн. точка в %-х экрана
         action.press(point(x, start_Y))
                 .waitAction(waitOptions(ofMillis(timeOfSwipe)))
                 .moveTo(point(x, end_Y))
@@ -105,7 +104,7 @@ public class Swipes {
 //        int i = countElementsXPathLocator(xPathLocator);
         while (countElementsXPathLocator(xPathLocator) == 0) {
             if (alreadySwiped > maxSwipes) {
-                waits.waitForElementPresent(By.xpath(xPathLocator), 1);
+               // waits.waitForElementPresent(By.xpath(xPathLocator), 1);
                 return;
             }
             swipe(300, 0.7, 0.5);

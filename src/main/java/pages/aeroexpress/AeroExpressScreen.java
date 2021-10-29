@@ -1,5 +1,6 @@
 package pages.aeroexpress;
 
+import enums.Dates;
 import helpers.DateSelected;
 import helpers.Swipes;
 import helpers.Switch;
@@ -68,8 +69,8 @@ public class AeroExpressScreen {
     }
 
     @Step("Выбор даты получения")
-    public void selectDateThere() {
-        dateSelected.tapDayStartInCalendar(0);
+    public void selectDateThere(Integer n) {
+        dateSelected.tapDayStartInCalendar(n);
     }
 
     @Step("Выбор даты возврата")
@@ -122,7 +123,7 @@ public class AeroExpressScreen {
     @Step("Заполняю поле CVV/CVC2")
     public void fillCVVField() {
         Swipes sp = new Swipes();
-        String df = "//android.widget.TextView[@resource-id='ru.s7.android:id/etPaymentCardCVV']";
+        //String df = "//android.widget.TextView[@resource-id='ru.s7.android:id/etPaymentCardCVV']";
         sp.swipeUpToElement("//android.widget.EditText[@resource-id='ru.s7.android:id/etPaymentCardCVV']");
         CVVField.sendKeys("123");
     }

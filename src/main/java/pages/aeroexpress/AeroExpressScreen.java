@@ -1,6 +1,5 @@
 package pages.aeroexpress;
 
-import enums.Dates;
 import helpers.DateSelected;
 import helpers.Swipes;
 import helpers.Switch;
@@ -58,20 +57,30 @@ public class AeroExpressScreen {
     @AndroidFindBy(xpath = "//android.widget.TextView[contains(@resource-id, 'ru.s7.android:id/btnNext')and @text=\"Оплатить\"]")
     private MobileElement payBtn; //кнопка Оплатить
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id='ru.s7.android:id/tvSuccessTitle' and @text='Оплачено']")
+    private MobileElement valueTitleStatus; //текст статуса
+
+    @AndroidFindBy(id = "ru.s7.android:id/tvBookingNumber")
+    private MobileElement bookingNumberField; //строка с номером брони
+
+    @AndroidFindBy(id = "ru.s7.android:id/btnGoToTrip")
+    private MobileElement goToMyS7Btn; //кнопка Перейти в My S7
+
 
     DateSelected dateSelected = new DateSelected();
 
     String switchLocatorID = "ru.s7.android:id/agree";
+    private String bookingNumberOfAE = null;
 
     @Step("Тап в поле Туда")
     public void tapThereBtn() {
         thereField.click();
     }
 
-    @Step("Выбор даты получения")
+/*    @Step("Выбор даты получения")
     public void selectDateThere(Integer n) {
         dateSelected.tapDayStartInCalendar(n);
-    }
+    }  */
 
     @Step("Выбор даты возврата")
     public void selectDateBack(Integer n) {
@@ -90,21 +99,25 @@ public class AeroExpressScreen {
 
     @Step("Заполняю поле Имя")
     public void fillNameInContactField() {
+        nameInContactField.clear();
         nameInContactField.sendKeys("Ivan");
     }
 
     @Step("Заполняю поле Фамилия")
     public void fillSurnameInContactField() {
+        surnameInContactField.clear();
         surnameInContactField.sendKeys("Petrov");
     }
 
     @Step("Заполняю поле Телефон")
     public void fillTelephoneInContactField() {
+        telephoneInContactField.clear();
         telephoneInContactField.sendKeys("+375295586849");
     }
 
     @Step("Заполняю поле Email")
     public void fillEmailInContactField() {
+        emailInContactField.click();
         emailInContactField.sendKeys("kanst2016@gmail.com");
     }
 
@@ -139,6 +152,26 @@ public class AeroExpressScreen {
     @Step("Нажимаю кнопку Оплатить")
     public void tapPayBtn() {
         payBtn.click();
+    }
+
+    @Step("Нажимаю кнопку Перейти в My S7")
+    public TripAEScreen clickGoToMyS7Btn() {
+        goToMyS7Btn.click();
+        return new TripAEScreen(driver);
+    }
+
+    private void setBookingNumberField() {
+        String bn = bookingNumberField.getText();
+        bookingNumberOfAE = bn.substring(bn.indexOf("(")+1, bn.indexOf(")"));
+    }
+
+    public String getValueStatus() {
+        return valueTitleStatus.getText();
+    }
+
+    public String getBookingNumberOfAE() {
+        setBookingNumberField();
+        return bookingNumberOfAE;
     }
 
 }

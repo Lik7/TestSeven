@@ -1,17 +1,23 @@
 import enums.Dates;
+import helpers.Swipes;
+import sun.security.mscapi.CPublicKey;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ForTestMethods {
 
 
     public static void main(String[] args) {
-        Dates d = Dates.DAYS;
-       // d.startToday();
-        //AppiumServer ap = new AppiumServer();
-        //ap.startServer();
-        // ap.stopServer();
-        /*AirportData AD = AirportData.LED;
-        System.out.println(AD.getCity() + AD.getNameEN());
-        AppiumServer.stopServer();
+        //Swipes s = new Swipes();
+        //s.swipeRightToLeft(1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM");
+        LocalDateTime dateTime = LocalDateTime.now();
+
+        String selectedReceiptDate = dateTime.format(formatter);
+        System.out.println("Test - " + selectedReceiptDate);
+
+
 
     /*public static void main(String[] args) throws InterruptedException {
         AppiumServer appiumServer = new AppiumServer();
@@ -20,23 +26,19 @@ public class ForTestMethods {
         //System.out.println("appium Server Started");
         appiumServer.stopServer();
         System.out.println("appium Server Stopped");
-
-
     }*/
-    }}
+    }
+//}
 
-
-
-
-
-
-        /*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, E");
+    public void data() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM");
         LocalDateTime dateTime = LocalDateTime.now();
 
         String selectedReceiptDate = dateTime.format(formatter);
         System.out.println("Test - " + selectedReceiptDate);
 
-        int amountOfRentalDays = 3;
+       /* int amountOfRentalDays = 3;
         String selectedReturnDate = dateTime.plusDays(amountOfRentalDays).format(formatter);
-        System.out.println("Test - " + selectedReturnDate);
-    }*/
+        System.out.println("Test - " + selectedReturnDate);*/
+    }
+}

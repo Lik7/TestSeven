@@ -22,19 +22,25 @@ public class HomeScreen {
     @AndroidFindBy(className = "android.widget.ImageButton")
     private MobileElement menuBtn;//кнопка Меню
 
+    @AndroidFindBy(className = "android.widget.ImageButton")
+    private MobileElement nameTitle;//имя в боковом меню
+
     @Step("Нажимаю кнопку Боковое меню")
     public Sidebar clickMenuBtn() {
-      /*  try {
-            sleep(15000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        boolean b = menuBtn.isDisplayed();
-        System.out.println(b);
-        if(!menuBtn.isDisplayed()){
-            driver.navigate().back();
-        }*/
+
         menuBtn.click();
+        try {
+            if (!nameTitle.isDisplayed()) {
+                sleep(2000);
+                menuBtn.click();
+            }
+        } catch (Exception e) {
+
+        }
         return new Sidebar(driver);
+    }
+
+    public AndroidDriver getDriver() {
+        return driver;
     }
 }

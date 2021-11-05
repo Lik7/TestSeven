@@ -16,7 +16,7 @@ public class AllureScreenShooter extends ExitCodeListener {
 
     public void onTestFailure(ITestResult testResult) {
         super.onTestFailure(testResult);
-        BaseTest bt = (BaseTest) testResult.getInstance();
+        //BaseTest bt = (BaseTest) testResult.getInstance();
         //WebDriver driver = bt.setUpDriver();
         //AndroidDriver driver = bt.setUpDriver();
         AndroidDriver driver = Driver.getDriver();

@@ -7,6 +7,8 @@ import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 
+import java.util.concurrent.TimeUnit;
+
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.PointOption.point;
 import static java.time.Duration.ofMillis;
@@ -26,7 +28,7 @@ public class Swipes {
         action.press(point(x, start_Y))
                 .waitAction(waitOptions(ofMillis(timeOfSwipe)))
                 .moveTo(point(x, end_Y))
-               // .waitAction(waitOptions(ofMillis(timeOfSwipe)))
+                // .waitAction(waitOptions(ofMillis(timeOfSwipe)))
                 .release()
                 .perform();
     }
@@ -57,6 +59,21 @@ public class Swipes {
         action.press(point(x, start_Y))
                 .waitAction(waitOptions(ofMillis(timeOfSwipe)))
                 .moveTo(point(x, end_Y))
+                .release()
+                .perform();
+    }
+
+    //Свап по экрану справа налево
+    public void swipeRightToLeft(int timeOfSwipe) {
+        TouchAction action = new TouchAction(driver);
+        Dimension sizeScreen = driver.manage().window().getSize();//Получаем размер экрана
+        int y = (int) (sizeScreen.height * 0.4);//высота экрана на которой будет свайп
+        int start_X = (int) (sizeScreen.width * 0.15); //Нач. точка в x% экрана справа
+        int end_X = (int) (sizeScreen.width * 0.8); //Конечн. точка в x%% экрана слева
+
+        action.press(point(start_X, y))
+                .waitAction(waitOptions(ofMillis(timeOfSwipe)))
+                .moveTo(point(end_X, y))
                 .release()
                 .perform();
     }
@@ -101,22 +118,22 @@ public class Swipes {
     public void swipeUpToElement(String xPathLocator) {
         int alreadySwiped = 0;//Кол-во сделанных свайпов
         int maxSwipes = 10;
-//        int i = countElementsXPathLocator(xPathLocator);
         while (countElementsXPathLocator(xPathLocator) == 0) {
             if (alreadySwiped > maxSwipes) {
-               // waits.waitForElementPresent(By.xpath(xPathLocator), 1);
                 return;
             }
             swipe(300, 0.7, 0.5);
             ++alreadySwiped;
         }
+        driver.manage().timeouts().implicitlyWait(Driver.getWaitSec(), TimeUnit.SECONDS);
     }
 
-    private int countElementsBy (By by){
+    private int countElementsBy(By by) {
         return driver.findElements(by).size();
     }
 
-    private int countElementsXPathLocator (String xPathLocator){
+    private int countElementsXPathLocator(String xPathLocator) {
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         return driver.findElements(By.xpath(xPathLocator)).size();
     }
 

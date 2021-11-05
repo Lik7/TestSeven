@@ -1,16 +1,10 @@
 package enums;
 
-import base.Driver;
 import helpers.DateSelected;
-import helpers.Swipes;
-import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-import java.time.temporal.ChronoField;
-
+//enum для указания даты в календаре
 public enum Dates {
-    DAYS(0, 1, 5,7);
+    DAYS(0, 1, 5, 7);
 
     private int today;
     private int tomorrow;
@@ -24,21 +18,27 @@ public enum Dates {
         this.inWeek = inWeek;
     }
 
+    DateSelected ds = new DateSelected();
+
     public int today() {
         return today;
     }
 
-    public int tomorrow() {
-        return tomorrow;
+
+    public void startTomorrow() {
+        ds.tapDayStartInCalendar(tomorrow);
     }
+
 
     public int addFiveDays() {
         return addFiveDays;
     }
 
-    public int getInWeek() {
+    public int inWeek() {
         return inWeek;
     }
-
+    public void finishInWeek() {
+        ds.tapDayFinishInCalendar(inWeek);
+    }
 
 }

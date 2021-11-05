@@ -10,14 +10,14 @@ public class Driver {
 
     private static AndroidDriver driver;
     private static String url = "http://127.0.0.1:4723/wd/hub";
+    private static int waitSec = 45;
 
     private static void initDriver() {
 
         try {
             if (driver == null) {
-                //url = new URL("http://127.0.0.1:4723/wd/hub");
                 driver = new AndroidDriver(new URL(url), new Capabilities().getCapabilities());
-                driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
+                driver.manage().timeouts().implicitlyWait(waitSec, TimeUnit.SECONDS);
             }
         } catch (
                 MalformedURLException e) {
@@ -28,6 +28,10 @@ public class Driver {
     public static AndroidDriver getDriver() {
         initDriver();
         return driver;
+    }
+
+    public static int getWaitSec() {
+        return waitSec;
     }
 }
 

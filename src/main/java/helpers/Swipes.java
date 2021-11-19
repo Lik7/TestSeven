@@ -79,6 +79,28 @@ public class Swipes {
     }
 
     //Свайп до элемента
+    public  void swipeUpToElement(String xPathLocator) {
+        int alreadySwiped = 0;//Кол-во сделанных свайпов
+        int maxSwipes = 10;
+        while (countElementsXPathLocator(xPathLocator) == 0) {
+            if (alreadySwiped > maxSwipes) {
+                return;
+            }
+            swipe(300, 0.7, 0.5);
+            ++alreadySwiped;
+        }
+        driver.manage().timeouts().implicitlyWait(Driver.getWaitSec(), TimeUnit.SECONDS);
+    }
+
+    private int countElementsBy(By by) {
+        return driver.findElements(by).size();
+    }
+
+    private int countElementsXPathLocator(String xPathLocator) {
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        return driver.findElements(By.xpath(xPathLocator)).size();
+    }
+
     public void swipeUpToElement(By by, int maxSwipes, double startPoint, double endPoint) {
         int alreadySwiped = 0;//Кол-во сделанных свайпов
         while (countElementsBy(by) == 0) {
@@ -114,27 +136,4 @@ public class Swipes {
             ++alreadySwiped;
         }
     }
-
-    public void swipeUpToElement(String xPathLocator) {
-        int alreadySwiped = 0;//Кол-во сделанных свайпов
-        int maxSwipes = 10;
-        while (countElementsXPathLocator(xPathLocator) == 0) {
-            if (alreadySwiped > maxSwipes) {
-                return;
-            }
-            swipe(300, 0.7, 0.5);
-            ++alreadySwiped;
-        }
-        driver.manage().timeouts().implicitlyWait(Driver.getWaitSec(), TimeUnit.SECONDS);
-    }
-
-    private int countElementsBy(By by) {
-        return driver.findElements(by).size();
-    }
-
-    private int countElementsXPathLocator(String xPathLocator) {
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-        return driver.findElements(By.xpath(xPathLocator)).size();
-    }
-
 }

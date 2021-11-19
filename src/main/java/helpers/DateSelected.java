@@ -34,7 +34,7 @@ public class DateSelected {
         //swipe.swipeUpToElement(xPathLocator, 3, 300, 0.65, 0.4);
         WebElement finishDate = driver.findElement(By.xpath(xPathLocator));
         if (!finishDate.isDisplayed()||!finishDate.isSelected()) {
-            swipe.swipe(300, 0.65, 0.4);
+            swipe.swipe(600, 0.65, 0.4);
         }
         finishDate.click();
     }

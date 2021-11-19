@@ -10,7 +10,9 @@ public class Capabilities extends DesiredCapabilities {
     public final static String FULL_RESET = "false";
     public final static String NO_RESET = "true";
     public final static String PRINT_PAGE_SOURCE_ON_FIND_FAILLURE = "true";
-    public final static String LAUNCH_TIMEOUT = "45000";
+    public final static String LAUNCH_TIMEOUT = "30000";
+    public final static String APP_WAIT_DURATION = "30000";
+    public final static String APP_WAIT_FOR_LAUNCH = "false";
     public final static String UNLOCK_TYPE = "pattern";
     public final static String UNLOCK_KEY = "523698741";
 
@@ -30,6 +32,8 @@ public class Capabilities extends DesiredCapabilities {
         capabilities.setCapability("noReset", NO_RESET);
         capabilities.setCapability("printPageSourceOnFindFailure", PRINT_PAGE_SOURCE_ON_FIND_FAILLURE);
         capabilities.setCapability("launchTimeout", LAUNCH_TIMEOUT);
+        capabilities.setCapability("appWaitDuration", APP_WAIT_DURATION);
+        capabilities.setCapability("appWaitForLaunch", APP_WAIT_FOR_LAUNCH);
         capabilities.setCapability("unlockType", UNLOCK_TYPE);
         capabilities.setCapability("unlockKey", UNLOCK_KEY);
         return capabilities;

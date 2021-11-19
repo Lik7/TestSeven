@@ -22,7 +22,7 @@ public class Switch {
     //метод переводит свич в состояние Выкл
     public void switchOFF(String locatorID) {
         String str = driver.findElement(By.id(locatorID)).getText();
-        System.out.println("Состояние свич: " + str);
+        System.out.println("Состояние свич 'Согласен с условиями': " + str);
         if (onRu.equalsIgnoreCase(str)) {
             driver.findElement(By.id(locatorID)).click();
         }

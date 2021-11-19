@@ -34,15 +34,6 @@ public class BaseTest {
         driver.startRecordingScreen();
     }
 
-/*    @AfterMethod
-    public void recVideo(ITestResult testResult) throws IOException {
-        String video = driver.stopRecordingScreen();
-        DateFormat dateFormat = new SimpleDateFormat("dd_MM-HH_mm");
-        Calendar cal = Calendar.getInstance();
-        byte[] decode = Base64.getDecoder().decode(video);
-        FileUtils.writeByteArrayToFile(new File("videoRecTests\\" + testResult.getName() + "-" + dateFormat.format(cal.getTime()) + ".mp4"), decode);
-    }*/
-
     @AfterClass
     public void teardown() {
         sleep(3000);
@@ -60,4 +51,15 @@ public class BaseTest {
                     + Arrays.toString(testResult.getParameters()) + dateFormat.format(cal.getTime()) + ".png"));
         }
     }
+
+/*    @AfterMethod
+    public void recVideo(ITestResult testResult) throws IOException {
+        String video = driver.stopRecordingScreen();
+        DateFormat dateFormat = new SimpleDateFormat("dd_MM-HH_mm");
+        Calendar cal = Calendar.getInstance();
+        byte[] decode = Base64.getDecoder().decode(video);
+        FileUtils.writeByteArrayToFile(new File("videoRecTests\\" + testResult.getName() + "-" + dateFormat.format(cal.getTime()) + ".mp4"), decode);
+        String mp4 = "videoRecTests\\" + testResult.getName() + "-" + dateFormat.format(cal.getTime()) + ".mp4";
+        AllureScreenShooter.attachRecord(mp4);
+    }*/
 }

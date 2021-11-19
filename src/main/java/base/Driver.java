@@ -13,7 +13,6 @@ public class Driver {
     private static int waitSec = 45;
 
     private static void initDriver() {
-
         try {
             if (driver == null) {
                 driver = new AndroidDriver(new URL(url), new Capabilities().getCapabilities());

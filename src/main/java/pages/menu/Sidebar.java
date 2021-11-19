@@ -7,7 +7,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.PageFactory;
-import pages.airTickets.AirTicketsScreen;
+import pages.airTickets.SelectDadesAirTicketScreen;
 import pages.settings.AppSettings;
 import pages.aeroexpress.AeroExpressScreen;
 import pages.rentalCar.RentalCarScreen;
@@ -16,6 +16,11 @@ import pages.tranfer.TransferScreen;
 
 public class Sidebar {
     private AndroidDriver driver;
+
+    public Sidebar(AndroidDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    }
 
     @AndroidFindBy(id = "ru.s7.android:id/navIbe")
     private MobileElement menuAirTicketsBtn;//кнопка Меню - авиабилеты
@@ -29,18 +34,14 @@ public class Sidebar {
     @AndroidFindBy(id = "ru.s7.android:id/navAuto")
     private MobileElement menuAutoBtn;//кнопка Меню - авто
 
-        @AndroidFindBy(id = "ru.s7.android:id/navSettings")
+    @AndroidFindBy(id = "ru.s7.android:id/navSettings")
     private MobileElement menuSettingsBtn;//кнопка Меню - Настройки
 
-    public Sidebar(AndroidDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-    }
 
     @Step("Нажимаю кнопку Авиабилеты в боковом меню")
-    public AirTicketsScreen clickMenuAirTicketsBtn() {
+    public SelectDadesAirTicketScreen clickMenuAirTicketsBtn() {
         menuAirTicketsBtn.click();
-        return new AirTicketsScreen(driver);
+        return new SelectDadesAirTicketScreen(driver);
     }
 
     @Step("Нажимаю кнопку Трансфер в боковом меню")

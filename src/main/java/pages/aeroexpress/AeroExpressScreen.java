@@ -1,5 +1,6 @@
 package pages.aeroexpress;
 
+import generalActions.pay.Pay;
 import helpers.DateSelected;
 import helpers.Swipes;
 import helpers.Switch;
@@ -45,14 +46,14 @@ public class AeroExpressScreen {
     @AndroidFindBy(xpath = "//android.widget.EditText[@text='Email']")
     private MobileElement emailInContactField; //поле Email в блоке Контакты
 
-    @AndroidFindBy(id = "ru.s7.android:id/btnChoosePaymentType")
+   /* @AndroidFindBy(id = "ru.s7.android:id/btnChoosePaymentType")
     private MobileElement methodsOfPaymentBtn;//кнопка Способы оплаты на экране Оплата
 
     @AndroidFindBy(id = "ru.s7.android:id/paymentCardName")
     private List<MobileElement> methodsOfPaymentList;//список способов оплаты
 
     @AndroidFindBy(id = "ru.s7.android:id/etPaymentCardCVV")
-    private MobileElement CVVField;//поле CVV/CVC2
+    private MobileElement CVVField;//поле CVV/CVC2*/
 
     @AndroidFindBy(xpath = "//android.widget.TextView[contains(@resource-id, 'ru.s7.android:id/btnNext')and @text=\"Оплатить\"]")
     private MobileElement payBtn; //кнопка Оплатить
@@ -69,7 +70,7 @@ public class AeroExpressScreen {
 
     DateSelected dateSelected = new DateSelected();
 
-    String switchLocatorID = "ru.s7.android:id/agree";
+    //String switchLocatorID = "ru.s7.android:id/agree";
     private String bookingNumberOfAE = null;
 
     @Step("Тап в поле Туда")
@@ -121,7 +122,7 @@ public class AeroExpressScreen {
         emailInContactField.sendKeys("kanst2016@gmail.com");
     }
 
-    @Step("")
+/*    @Step("")
     public void clickMethodsOfPaymentBtn() {
         methodsOfPaymentBtn.click();
     }
@@ -139,14 +140,22 @@ public class AeroExpressScreen {
         //String df = "//android.widget.TextView[@resource-id='ru.s7.android:id/etPaymentCardCVV']";
         sp.swipeUpToElement("//android.widget.EditText[@resource-id='ru.s7.android:id/etPaymentCardCVV']");
         CVVField.sendKeys("123");
-    }
+    }*/
 
-    @Step("Включаю свич согласия с условиями")
+/*    @Step("Включаю свич согласия с условиями")
     public void onSwitchAgreeToTerms() {
         Switch sw = new Switch();
         Swipes sp = new Swipes();
         sp.swipeUpToElement("//android.widget.Switch[@resource-id='ru.s7.android:id/agree']");
         sw.switchON(switchLocatorID);
+    }*/
+
+    @Step("Заполняю реквизиты оплаты банковской картой")
+    public void fillPaymentDetails(){
+        Pay pay = new Pay(driver);
+        pay.selectMethodOfPayment(1);
+        pay.fillCVVField();
+        pay.onSwitchAgreeToTerms();
     }
 
     @Step("Нажимаю кнопку Оплатить")

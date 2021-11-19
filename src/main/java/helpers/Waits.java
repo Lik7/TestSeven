@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Waits {
 
-    private AndroidDriver driver = Driver.getDriver();
+    private static AndroidDriver driver = Driver.getDriver();
 
 
     //Ожидание нужного элемента
@@ -35,11 +35,33 @@ public class Waits {
         }
     }
 
-    //проверка отображается ли элемент на экране
-    public boolean elementIsDisp(String xPathLocator) {
+    //проверка отображается ли элемент на экране через xPach локатор
+    public static boolean elementIsDispXPathLocator(String xPathLocator) {
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         boolean b = true;
         if (driver.findElements(By.xpath(xPathLocator)).size() == 0) {
+            b = false;
+        }
+        driver.manage().timeouts().implicitlyWait(Driver.getWaitSec(), TimeUnit.SECONDS);
+        return b;
+    }
+
+    //проверка отображается ли элемент на экране через ID локатор
+    public static boolean elementIsDispIDLocator(String idLocator) {
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        boolean b = true;
+        if (driver.findElements(By.id(idLocator)).size() == 0) {
+            b = false;
+        }
+        driver.manage().timeouts().implicitlyWait(Driver.getWaitSec(), TimeUnit.SECONDS);
+        return b;
+    }
+
+    //проверка отображается ли элемент на экране через ClassName локатор
+    public boolean elementIsDispClassName(String classNameLocator) {
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        boolean b = true;
+        if (driver.findElements(By.id(classNameLocator)).size() == 0) {
             b = false;
         }
         driver.manage().timeouts().implicitlyWait(Driver.getWaitSec(), TimeUnit.SECONDS);

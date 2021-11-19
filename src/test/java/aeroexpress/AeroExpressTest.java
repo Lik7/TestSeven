@@ -2,7 +2,7 @@ package aeroexpress;
 
 import base.BaseTest;
 import enums.Dates;
-import helpers.Swipes;
+import generalActions.pay.Pay;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.aeroexpress.AeroExpressScreen;
@@ -21,10 +21,12 @@ public class AeroExpressTest extends BaseTest {
         dates.finishInWeek();
         aeroExpressScreen.clickChoiceOfPassengersBtn();
         aeroExpressScreen.clickNextBtn();
-        aeroExpressScreen.selectMethodOfPayment(1);
+/*        aeroExpressScreen.selectMethodOfPayment(1);
         aeroExpressScreen.fillCVVField();
-        aeroExpressScreen.onSwitchAgreeToTerms();
+        aeroExpressScreen.onSwitchAgreeToTerms();*/
         aeroExpressScreen.tapPayBtn();
+
+
         System.out.println("Номер брони: " + aeroExpressScreen.getBookingNumberOfAE());
         Assert.assertEquals(aeroExpressScreen.getValueStatus(), "Оплачено", "Результат покупки билета АЕ " + aeroExpressScreen.getValueStatus() + " ,а не Оплачено");
     }

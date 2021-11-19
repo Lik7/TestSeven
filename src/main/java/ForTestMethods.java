@@ -27,6 +27,7 @@ public class ForTestMethods {
         appiumServer.stopServer();
         System.out.println("appium Server Stopped");
     }*/
+
     }
 //}
 

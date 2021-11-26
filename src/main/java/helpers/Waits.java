@@ -22,6 +22,9 @@ public class Waits {
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
+    /*wait = new WebDriverWait(driver, 30);
+wait.until(presenceOfElementLocated(MobileBy.AccessibilityId("login"))).click();*/
+
     public void waitElement(String xPathLocator) {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         int count = 0;
@@ -58,7 +61,7 @@ public class Waits {
     }
 
     //проверка отображается ли элемент на экране через ClassName локатор
-    public boolean elementIsDispClassName(String classNameLocator) {
+    public static boolean elementIsDispClassName(String classNameLocator) {
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         boolean b = true;
         if (driver.findElements(By.id(classNameLocator)).size() == 0) {

@@ -11,7 +11,7 @@ import pages.menu.Sidebar;
 public class AeroExpressTest extends BaseTest {
 
     @Test(description = "Покупка билета на АЕ стенделон. Пользователь залогирован, банковская карта сохранена")
-    public void buyingAETicketTest() {
+    public void buyingAETicketSATest() {
 
         Sidebar sidebar = homeScreen.clickMenuBtn();
         AeroExpressScreen aeroExpressScreen = sidebar.clickMenuAeroexpressBtn();

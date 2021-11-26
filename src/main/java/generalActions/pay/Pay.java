@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
+//заполнение экрана оплаты
 public class Pay {
     AndroidDriver driver;
 
@@ -28,29 +29,22 @@ public class Pay {
     @AndroidFindBy(id = "ru.s7.android:id/etPaymentCardCVV")
     private MobileElement CVVField;//поле CVV/CVC2
 
-    /*@AndroidFindBy(xpath = "//android.widget.TextView[contains(@resource-id, 'ru.s7.android:id/btnNext')and @text=\"Оплатить\"]")
-    private MobileElement payBtn; //кнопка Оплатить*/
+    @AndroidFindBy(xpath = "//android.widget.TextView[contains(@resource-id, 'ru.s7.android:id/btnNext')and @text=\"Оплатить\"]")
+    private MobileElement payBtn; //кнопка Оплатить
 
     String switchLocatorID = "ru.s7.android:id/agree";
 
 
-    @Step("")
-    public void clickMethodsOfPaymentBtn() {
-        methodsOfPaymentBtn.click();
-    }
-
-    @Step("Выбираю способ оплаты")
-    public void selectMethodOfPayment(Integer i) {
-        methodsOfPaymentBtn.click();
-        MobileElement mobileElement = methodsOfPaymentList.get(i);
-        mobileElement.click();
+    @Step("Выбираю способ оплаты банковской картой")
+    public void selectMethodOfPaymentIsCard() {
+        selectMethodOfPayment(1);
     }
 
     @Step("Заполняю поле CVV/CVC2")
     public void fillCVVField() {
         Swipes sp = new Swipes();
         //String df = "//android.widget.TextView[@resource-id='ru.s7.android:id/etPaymentCardCVV']";
-        sp.swipeUpToElement("//android.widget.EditText[@resource-id='ru.s7.android:id/etPaymentCardCVV']");
+        sp.swipeUpToElement("//android.widget.EditText[@resource-id='ru.s7.android:id/etPaymentCardCVV']", 10);
         CVVField.sendKeys("123");
     }
 
@@ -58,12 +52,21 @@ public class Pay {
     public void onSwitchAgreeToTerms() {
         Switch sw = new Switch();
         Swipes sp = new Swipes();
-        sp.swipeUpToElement("//android.widget.Switch[@resource-id='ru.s7.android:id/agree']");
+//        sp.swipeUpToElement("//android.widget.Switch[@resource-id='ru.s7.android:id/agree']", 0.7, 0.3);
+        sp.scrollDown();
         sw.switchON(switchLocatorID);
     }
 
-/*    @Step("Нажимаю кнопку Оплатить")
+    @Step("Нажимаю кнопку Оплатить")
     public void tapPayBtn() {
         payBtn.click();
-    }*/
+    }
+
+
+    //метод выбирает способ оплаты из списка карт
+    private void selectMethodOfPayment(Integer i) {
+        methodsOfPaymentBtn.click();
+        MobileElement mobileElement = methodsOfPaymentList.get(i);
+        mobileElement.click();
+    }
 }

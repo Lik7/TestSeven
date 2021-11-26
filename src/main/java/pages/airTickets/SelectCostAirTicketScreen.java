@@ -80,7 +80,7 @@ public class SelectCostAirTicketScreen {
             paymentTypePayNowBtn.click();
         }
         Swipes sp = new Swipes();
-        sp.swipeUpToElement("//android.widget.RelativeLayout[@resource-id='ru.s7.android:id/btnChoosePaymentType']");
+        sp.swipeUpToElement("//android.widget.RelativeLayout[@resource-id='ru.s7.android:id/btnChoosePaymentType']", 10);
         methodsOfPaymentBtn.click();
         MobileElement mobileElement = methodsOfPaymentList.get(1);
         mobileElement.click();
@@ -98,7 +98,7 @@ public class SelectCostAirTicketScreen {
     public void onSwitchAgreeToTerms() {
         Switch sw = new Switch();
         Swipes sp = new Swipes();
-        sp.swipeUpToElement("//android.widget.Switch[@resource-id='ru.s7.android:id/agree']");
+        sp.swipeUpToElement("//android.widget.Switch[@resource-id='ru.s7.android:id/agree']", 10);
         sw.switchON(switchLocatorID);
     }
 

@@ -12,7 +12,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
-
+//экран АЕ из бокового меню
 public class AeroExpressScreen {
 
     private AndroidDriver driver;
@@ -153,7 +153,7 @@ public class AeroExpressScreen {
     @Step("Заполняю реквизиты оплаты банковской картой")
     public void fillPaymentDetails(){
         Pay pay = new Pay(driver);
-        pay.selectMethodOfPayment(1);
+        pay.selectMethodOfPaymentIsCard();
         pay.fillCVVField();
         pay.onSwitchAgreeToTerms();
     }

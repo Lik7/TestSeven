@@ -1,6 +1,10 @@
-public class Start {
+import base.BaseTest;
+import org.testng.annotations.Test;
+import pages.menu.Sidebar;
 
-   /* @Test
+public class Start extends BaseTest {
+
+    /*@Test
     public void startApp() {
         BaseSetup setupDriver = new BaseSetup();
         setupDriver.setUpDriver();
@@ -12,4 +16,10 @@ public class Start {
         enter.enterPassword();
         enter.tapEnterBtn();
     }*/
+
+    @Test
+    public void s(){
+        Sidebar sidebar = homeScreen.clickMenuBtn();
+        sidebar.clickMenuDebugViewsBtn();
+    }
 }

@@ -32,8 +32,8 @@ public class MyBookingsScreen {
     @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id='ru.s7.android:id/btnText' and @text='Купить билет']")
     private MobileElement bayTripBtn;//кнопка Купить билет
 
-    @AndroidFindBy(id = "ru.s7.android:id/tvDestination")
-    private MobileElement cityInBookingCard; //поле с названием города в карточке брони
+    //@AndroidFindBy(id = "ru.s7.android:id/tvDestination")
+    //private MobileElement cityInBookingCard; //поле с названием города в карточке брони
 
     String bayTripBtnXpathLocator = "//android.widget.TextView[@resource-id='ru.s7.android:id/btnText' and @text='Купить билет']";
 
@@ -57,9 +57,9 @@ public class MyBookingsScreen {
         }
     }
 
-    @Step("Перехожу на экран деталей брони")
+/*    @Step("Перехожу на экран деталей брони")
     public DetailSpecBookingScreen clickCityInBookingCard(){
         cityInBookingCard.click();
         return new DetailSpecBookingScreen(driver);
-    }
+    }*/
 }

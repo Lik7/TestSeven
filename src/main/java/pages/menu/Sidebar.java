@@ -37,6 +37,9 @@ public class Sidebar {
     @AndroidFindBy(id = "ru.s7.android:id/navSettings")
     private MobileElement menuSettingsBtn;//кнопка Меню - Настройки
 
+    @AndroidFindBy(id = "ru.s7.android:id/navDebugViews")
+    private MobileElement menuDebugViewsBtn;
+
 
     @Step("Нажимаю кнопку Авиабилеты в боковом меню")
     public SelectDadesAirTicketScreen clickMenuAirTicketsBtn() {
@@ -65,8 +68,15 @@ public class Sidebar {
     @Step("Нажимаю кнопку Настройки в меню")
     public AppSettings clickSettingBtn() {
         Swipes sw = new Swipes();
-        sw.swipeUpToElement("//androidx.appcompat.widget.LinearLayoutCompat[@resource-id='ru.s7.android:id/navSettings']");
+        sw.swipeUpToElement("//androidx.appcompat.widget.LinearLayoutCompat[@resource-id='ru.s7.android:id/navSettings']",10);
         menuSettingsBtn.click();
         return new AppSettings(driver);
+    }
+
+    @Step
+    public void clickMenuDebugViewsBtn(){
+        Swipes swipes = new Swipes();
+        swipes.swipeUpAfterDownToElement("//*[@resource-id=\"ru.s7.android:id/navDebugViews\"]", 2);
+        menuDebugViewsBtn.click();
     }
 }

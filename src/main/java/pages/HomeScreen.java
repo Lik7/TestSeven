@@ -33,6 +33,9 @@ public class HomeScreen {
     @AndroidFindBy(id = "ru.s7.android:id/design_menu_item_text")
     private MobileElement menuEl;//элемент меню для проверки открыто ли уже меню
 
+    @AndroidFindBy(id = "ru.s7.android:id/tvDestination")
+    private MobileElement cityInBookingCard; //поле с названием города в карточке брони
+
     //Waits wait = new Waits();
 
     @Step("Нажимаю кнопку Боковое меню")
@@ -52,6 +55,12 @@ public class HomeScreen {
 
         }
         return new Sidebar(driver);
+    }
+
+    @Step("Перехожу на экран деталей брони")
+    public DetailSpecBookingScreen clickCityInBookingCard(){
+        cityInBookingCard.click();
+        return new DetailSpecBookingScreen(driver);
     }
 
     public AndroidDriver getDriver() {

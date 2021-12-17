@@ -1,6 +1,6 @@
 package pages.aeroexpress;
 
-import generalActions.pay.Pay;
+import generalActions.pay.PayScreen;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -8,11 +8,11 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.PageFactory;
 
-public class AddBuyAE {
+public class AddBuyAEScreen {
 
     private AndroidDriver driver;
 
-    public AddBuyAE(AndroidDriver driver) {
+    public AddBuyAEScreen(AndroidDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
@@ -34,10 +34,10 @@ public class AddBuyAE {
 
     @Step("Заполняю реквизиты оплаты банковской картой")
     public void fillPaymentDetails() {
-        Pay pay = new Pay(driver);
-        pay.selectMethodOfPaymentIsCard();
-        pay.fillCVVField();
-        pay.onSwitchAgreeToTerms();
+        PayScreen payScreen = new PayScreen(driver);
+        payScreen.selectMethodOfPaymentIsCard();
+        payScreen.fillCVVField();
+        payScreen.onSwitchAgreeToTerms();
     }
 
     @Step("Нажимаю кнопку Оплатить")

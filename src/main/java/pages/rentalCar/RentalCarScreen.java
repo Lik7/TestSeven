@@ -71,7 +71,6 @@ public class RentalCarScreen {
     private int todayDayInt = java.time.LocalDate.now().get(ChronoField.DAY_OF_MONTH); // число сегодня в int
 
     HideKeyboardIfVisible hideKeyboardIfVisible = new HideKeyboardIfVisible();
-    Swipes swipe = new Swipes();
     DateSelected dateSelected = new DateSelected();
 
     @Step("Тап в поле Место получения")

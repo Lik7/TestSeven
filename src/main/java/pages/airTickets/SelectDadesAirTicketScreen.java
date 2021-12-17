@@ -82,7 +82,7 @@ public class SelectDadesAirTicketScreen {
         WebElement searchFieldIsFocused = driver.findElement(By.id("ru.s7.android:id/search_src_text"));
         searchFieldIsFocused.clear();
         searchFieldIsFocused.sendKeys("led");
-        WebElement airportOfDeparture = driver.findElement(By.id("ru.s7.android:id/originCity"));
+        WebElement airportOfDeparture = driver.findElement(By.id("ru.s7.android:id/text1"));
         airportOfDeparture.click();
     }
 
@@ -96,7 +96,7 @@ public class SelectDadesAirTicketScreen {
         searchField.click();
         WebElement searchFieldIsFocused = driver.findElement(By.id("ru.s7.android:id/search_src_text"));
         searchFieldIsFocused.sendKeys("dme");
-        WebElement airportOfDeparture = driver.findElement(By.id("ru.s7.android:id/originCity"));
+        WebElement airportOfDeparture = driver.findElement(By.id("ru.s7.android:id/text1"));
         airportOfDeparture.click();
     }
 

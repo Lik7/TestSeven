@@ -21,7 +21,6 @@ public class DateSelected {
         String xPathLocator = "//android.widget.TextView[@text=" + "'" + todayDayString + "'" + "]";
         //System.out.println("todayDayInt:" + todayDayInt);
         //System.out.println("todayDayString:" + todayDayString);
-        //swipe.swipeUpToElement(xPathLocator, 3, 300, 0.65, 0.4);
 
         WebElement startDate = driver.findElement(By.xpath(xPathLocator));
         startDate.click();
@@ -31,9 +30,8 @@ public class DateSelected {
     public void tapDayFinishInCalendar(Integer CountDay) {
         String todayDayString = Integer.toString(todayDayInt + CountDay);//плюс дней от сегодня
         String xPathLocator = "//android.widget.TextView[@text=" + "'" + todayDayString + "'" + "]";
-        //swipe.swipeUpToElement(xPathLocator, 3, 300, 0.65, 0.4);
         WebElement finishDate = driver.findElement(By.xpath(xPathLocator));
-        if (!finishDate.isDisplayed()||!finishDate.isSelected()) {
+        if (!finishDate.isDisplayed()) {
             swipe.scrollDown();
         }
         finishDate.click();

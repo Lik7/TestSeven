@@ -12,23 +12,13 @@ public class BuyAirTicketTest extends BaseTest {
     public void buyAirTicketTest() {
         Sidebar sidebar = homeScreen.clickMenuBtn();
         SelectDadesAirTicketScreen airTicket = sidebar.clickMenuAirTicketsBtn();
-        airTicket.clickDepartureCity();
+/*        airTicket.clickDepartureCity();
         airTicket.selectAirportOfDeparture();
         airTicket.clickArrivalCity();
-        airTicket.selectAirportOfArrival();
+        airTicket.selectAirportOfArrival();*/
         airTicket.clickDepartureDate();
         airTicket.selectDepartureArrivalDates();
         SelectCostAirTicketScreen costAirTicket = airTicket.clickSearchBtn();
-        /*airTicket.selectTicket();
-        airTicket.selectTicket();
-        airTicket.clickNextBtn();
-        airTicket.clickAddPassengerBtn();
-        airTicket.clickNextBtn();
-        airTicket.clickNextBtn();
-        airTicket.selectMethodOfPayment();
-        airTicket.fillCVVField();
-        airTicket.onSwitchAgreeToTerms();
-        airTicket.tapPayBtn();*/
 
         costAirTicket.selectTicket();
         costAirTicket.selectTicket();

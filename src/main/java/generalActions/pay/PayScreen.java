@@ -12,10 +12,10 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 //заполнение экрана оплаты
-public class Pay {
+public class PayScreen {
     AndroidDriver driver;
 
-    public Pay(AndroidDriver driver) {
+    public PayScreen(AndroidDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
@@ -44,7 +44,7 @@ public class Pay {
     public void fillCVVField() {
         Swipes sp = new Swipes();
         //String df = "//android.widget.TextView[@resource-id='ru.s7.android:id/etPaymentCardCVV']";
-        sp.swipeUpToElement("//android.widget.EditText[@resource-id='ru.s7.android:id/etPaymentCardCVV']", 10);
+        sp.scrollToElementDown("//android.widget.EditText[@resource-id='ru.s7.android:id/etPaymentCardCVV']", 10);
         CVVField.sendKeys("123");
     }
 
@@ -52,7 +52,6 @@ public class Pay {
     public void onSwitchAgreeToTerms() {
         Switch sw = new Switch();
         Swipes sp = new Swipes();
-//        sp.swipeUpToElement("//android.widget.Switch[@resource-id='ru.s7.android:id/agree']", 0.7, 0.3);
         sp.scrollDown();
         sw.switchON(switchLocatorID);
     }
@@ -60,6 +59,14 @@ public class Pay {
     @Step("Нажимаю кнопку Оплатить")
     public void tapPayBtn() {
         payBtn.click();
+    }
+
+    @Step("Заполняю реквизиты оплаты банковской картой")
+    public void paySavedBankCard() {
+        selectMethodOfPaymentIsCard();
+        fillCVVField();
+        onSwitchAgreeToTerms();
+        tapPayBtn();
     }
 
 

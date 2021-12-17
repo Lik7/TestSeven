@@ -2,7 +2,6 @@ package aeroexpress;
 
 import base.BaseTest;
 import enums.Dates;
-import generalActions.pay.Pay;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.aeroexpress.AeroExpressScreen;

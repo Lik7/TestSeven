@@ -5,7 +5,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class Capabilities extends DesiredCapabilities {
     public final static String PLATFORM_NAME = "Android";
     public final static String APP_PACKAGE = "ru.s7.android";
-    public final static String APP_ACTIVITY = "ru.s7.android.ui.SplashActivity";
+    //public final static String APP_ACTIVITY = "ru.s7.android.ui.SplashActivity";
+    public final static String APP_ACTIVITY = "ru.s7.android.ui.MainActivity";
     public final static String APP_WAIT_ACTIVITY = "ru.s7.android.ui.MainActivity";
     public final static String FULL_RESET = "false";
     public final static String NO_RESET = "true";
@@ -27,7 +28,7 @@ public class Capabilities extends DesiredCapabilities {
         capabilities.setCapability("udid", "ENU7N15B06000502");
         capabilities.setCapability("appPackage", APP_PACKAGE);
         capabilities.setCapability("appActivity", APP_ACTIVITY);
-        capabilities.setCapability("appWaitActivity", APP_WAIT_ACTIVITY);
+        //capabilities.setCapability("appWaitActivity", APP_WAIT_ACTIVITY);
         capabilities.setCapability("fullReset", FULL_RESET);
         capabilities.setCapability("noReset", NO_RESET);
         capabilities.setCapability("printPageSourceOnFindFailure", PRINT_PAGE_SOURCE_ON_FIND_FAILLURE);

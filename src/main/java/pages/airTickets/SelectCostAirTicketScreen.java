@@ -33,8 +33,8 @@ public class SelectCostAirTicketScreen {
     @AndroidFindBy(id = "ru.s7.android:id/btnNext")
     private MobileElement nextBtn;//кнопка Далее
 
-    @AndroidFindBy(id = "ru.s7.android:id/circleFrame")
-    private List<MobileElement> addPassengerBtn;//кнопка Добавить пассажира
+    @AndroidFindBy(id = "ru.s7.android:id/nameText")
+    private List<MobileElement> passengerNameField;//поле с именем пассажира
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Оплатить сейчас']")
     private MobileElement paymentTypePayNowBtn;//тип оплаты Оплатить сейчас
@@ -69,8 +69,8 @@ public class SelectCostAirTicketScreen {
 
     @Step("Добавляю пассажира")
     public void clickAddPassengerBtn(){
-        int i = addPassengerBtn.size();
-        addPassengerBtn.get(i-1).click();
+        int i = passengerNameField.size();
+        passengerNameField.get(0).click();
     }
 
     @Step("Выбираю способ оплаты")
@@ -80,7 +80,7 @@ public class SelectCostAirTicketScreen {
             paymentTypePayNowBtn.click();
         }
         Swipes sp = new Swipes();
-        sp.swipeUpToElement("//android.widget.RelativeLayout[@resource-id='ru.s7.android:id/btnChoosePaymentType']", 10);
+        sp.scrollToElementDown("//android.widget.RelativeLayout[@resource-id='ru.s7.android:id/btnChoosePaymentType']", 10);
         methodsOfPaymentBtn.click();
         MobileElement mobileElement = methodsOfPaymentList.get(1);
         mobileElement.click();
@@ -98,7 +98,7 @@ public class SelectCostAirTicketScreen {
     public void onSwitchAgreeToTerms() {
         Switch sw = new Switch();
         Swipes sp = new Swipes();
-        sp.swipeUpToElement("//android.widget.Switch[@resource-id='ru.s7.android:id/agree']", 10);
+        sp.scrollToElementDown("//android.widget.Switch[@resource-id='ru.s7.android:id/agree']", 10);
         sw.switchON(switchLocatorID);
     }
 

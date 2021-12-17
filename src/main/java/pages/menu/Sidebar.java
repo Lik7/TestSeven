@@ -68,7 +68,7 @@ public class Sidebar {
     @Step("Нажимаю кнопку Настройки в меню")
     public AppSettings clickSettingBtn() {
         Swipes sw = new Swipes();
-        sw.swipeUpToElement("//androidx.appcompat.widget.LinearLayoutCompat[@resource-id='ru.s7.android:id/navSettings']",10);
+        sw.scrollToElementDown("//androidx.appcompat.widget.LinearLayoutCompat[@resource-id='ru.s7.android:id/navSettings']",10);
         menuSettingsBtn.click();
         return new AppSettings(driver);
     }
@@ -76,7 +76,7 @@ public class Sidebar {
     @Step
     public void clickMenuDebugViewsBtn(){
         Swipes swipes = new Swipes();
-        swipes.swipeUpAfterDownToElement("//*[@resource-id=\"ru.s7.android:id/navDebugViews\"]", 2);
+        swipes.scrollDownUpToElement("//*[@resource-id='ru.s7.android:id/navDebugViews_']", 3);
         menuDebugViewsBtn.click();
     }
 }

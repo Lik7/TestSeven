@@ -8,7 +8,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.PageFactory;
 import pages.menu.Sidebar;
-import pages.myBooking.DetailSpecBookingScreen;
+import pages.myBooking.DetailOfBookingScreen;
 
 import static java.lang.Thread.sleep;
 
@@ -41,7 +41,7 @@ public class HomeScreen {
     @Step("Нажимаю кнопку Боковое меню")
     public Sidebar clickMenuBtn() {
         try {
-            sleep(2000);
+            sleep(3000);
             //if (!wait.elementIsDispClassName("android.widget.ImageButton")) {
             if (!Waits.elementIsDispXPathLocator("//android.widget.ImageButton[@content-desc='Open navigation drawer']")) {
                 driver.navigate().back();
@@ -58,9 +58,23 @@ public class HomeScreen {
     }
 
     @Step("Перехожу на экран деталей брони")
-    public DetailSpecBookingScreen clickCityInBookingCard(){
-        cityInBookingCard.click();
-        return new DetailSpecBookingScreen(driver);
+    public DetailOfBookingScreen clickCityInBookingCard() {
+        try {
+            sleep(2000);
+            //if (!wait.elementIsDispClassName("android.widget.ImageButton")) {
+            if (!Waits.elementIsDispXPathLocator("//android.widget.ImageButton[@content-desc='Open navigation drawer']")) {
+                driver.navigate().back();
+            }
+            cityInBookingCard.click();
+
+            /*if (!Waits.elementIsDispIDLocator("ru.s7.android:id/design_menu_item_text")) {
+                cityInBookingCard.click();
+            }*/
+        } catch (Exception e) {
+
+        }
+        //cityInBookingCard.click();
+        return new DetailOfBookingScreen(driver);
     }
 
     public AndroidDriver getDriver() {

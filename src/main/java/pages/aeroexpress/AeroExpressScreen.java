@@ -1,9 +1,7 @@
 package pages.aeroexpress;
 
-import generalActions.pay.Pay;
+import generalActions.pay.PayScreen;
 import helpers.DateSelected;
-import helpers.Swipes;
-import helpers.Switch;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -11,7 +9,6 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
 //экран АЕ из бокового меню
 public class AeroExpressScreen {
 
@@ -152,10 +149,10 @@ public class AeroExpressScreen {
 
     @Step("Заполняю реквизиты оплаты банковской картой")
     public void fillPaymentDetails(){
-        Pay pay = new Pay(driver);
-        pay.selectMethodOfPaymentIsCard();
-        pay.fillCVVField();
-        pay.onSwitchAgreeToTerms();
+        PayScreen payScreen = new PayScreen(driver);
+        payScreen.selectMethodOfPaymentIsCard();
+        payScreen.fillCVVField();
+        payScreen.onSwitchAgreeToTerms();
     }
 
     @Step("Нажимаю кнопку Оплатить")

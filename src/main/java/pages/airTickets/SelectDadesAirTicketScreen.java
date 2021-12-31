@@ -110,7 +110,8 @@ public class SelectDadesAirTicketScreen {
     @Step("Задаю даты вылета и прилета")
     public void selectDepartureArrivalDates() {
         Dates dates = Dates.DAYS;
-        dates.startTomorrow();
+        //dates.startTomorrow();
+        dates.startInFiveDays();
         dates.finishInWeek();
         doneBtnInCalendar.click();
     }

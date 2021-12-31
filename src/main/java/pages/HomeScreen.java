@@ -60,11 +60,12 @@ public class HomeScreen {
     @Step("Перехожу на экран деталей брони")
     public DetailOfBookingScreen clickCityInBookingCard() {
         try {
-            sleep(2000);
+            sleep(8000);
             //if (!wait.elementIsDispClassName("android.widget.ImageButton")) {
-            if (!Waits.elementIsDispXPathLocator("//android.widget.ImageButton[@content-desc='Open navigation drawer']")) {
-                driver.navigate().back();
-            }
+//            if (!Waits.elementIsDispXPathLocator("//android.widget.ImageButton[@content-desc='Open navigation drawer']")) {
+//                driver.navigate().back();
+//            }
+            driver.navigate().back();
             cityInBookingCard.click();
 
             /*if (!Waits.elementIsDispIDLocator("ru.s7.android:id/design_menu_item_text")) {
@@ -73,7 +74,6 @@ public class HomeScreen {
         } catch (Exception e) {
 
         }
-        //cityInBookingCard.click();
         return new DetailOfBookingScreen(driver);
     }
 

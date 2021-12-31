@@ -40,8 +40,8 @@ public class Waits {
         driver.manage().timeouts().implicitlyWait(Driver.getWaitSec(), TimeUnit.SECONDS);
     }
 
+    //возвращает true если элемент отображается, возвращает false если не отображается
     private static boolean elementIsDisp(String locator) {
-        //возвращает true если элемент отображается, возвращает false если не отображается
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         boolean b = true;
         if (driver.findElements(By.xpath(locator)).size() == 0) {

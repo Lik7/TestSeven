@@ -35,6 +35,15 @@ public class DetailOfBookingScreen {
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Страховка от невыезда']")
     private MobileElement notLeavingInsName;//название Страховка от невыезда
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Медицинская страховка']")
+    private MobileElement medicalInsName;//название Медицинская страховка
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Страховка Трэвел']")
+    private MobileElement travelInsName;//название Страховка Трэвел
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Страховка Трэвел-Спорт']")
+    private MobileElement travelSportInsName;//название Страховка Трэвел-Спорт
+
     Swipes swipe = new Swipes();
 
     //элемент в уже купленном продукте
@@ -71,10 +80,30 @@ public class DetailOfBookingScreen {
         notLeavingInsName.click();
         return new InsuranceScreen(driver);
     }
+    @Step("Тап по баннеру Медицинская страховка")
+    public InsuranceScreen medicalInsNameClick() {
+        medicalInsName.click();
+        return new InsuranceScreen(driver);
+    }
+
+    @Step("Тап по баннеру Страховка Трэвел")
+    public InsuranceScreen travelInsNameClick() {
+        travelInsName.click();
+        return new InsuranceScreen(driver);
+    }
+
+    @Step("Тап по баннеру Страховка Трэвел-Спорт")
+    public InsuranceScreen travelSportInsNameClick() {
+        travelSportInsName.click();
+        return new InsuranceScreen(driver);
+    }
 
     @Step("Проверяю, что страховка куплена")
     public boolean payedInsuranceIsDisp(String insurance) {
-        String fieldPayedInsurance = "android.widget.TextView[contains(@resource-id,'ru.s7.android:id/tvProductName') and @text='" + insurance + "']";
-        return Waits.elementIsDispIDLocator(fieldPayedInsurance);
+        String fieldPayedInsurance = "//android.widget.TextView[contains(@resource-id,'ru.s7.android:id/tvProductName') and @text='" + insurance + "']";
+        swipe.scrollDownUpToElement(fieldPayedInsurance, 5);
+
+        //System.out.println("текст локатора: " + fieldPayedInsurance);
+        return Waits.elementIsDispXPathLocator(fieldPayedInsurance);
     }
 }

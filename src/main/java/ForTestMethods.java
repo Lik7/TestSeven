@@ -1,4 +1,5 @@
 import enums.Dates;
+import enums.Insurance;
 import helpers.Swipes;
 import sun.security.mscapi.CPublicKey;
 
@@ -11,12 +12,17 @@ public class ForTestMethods {
     public static void main(String[] args) {
         //Swipes s = new Swipes();
         //s.swipeRightToLeft(1);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM");
+        /*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM");
         LocalDateTime dateTime = LocalDateTime.now();
 
         String selectedReceiptDate = dateTime.format(formatter);
-        System.out.println("Test - " + selectedReceiptDate);
+        System.out.println("Test - " + selectedReceiptDate);*/
 
+
+
+
+        //Insurance insurance = Insurance.MEDICAL_INSURANCE;
+        System.out.println(Insurance.MEDICAL_INSURANCE.getInsuranceName());
 
 
     /*public static void main(String[] args) throws InterruptedException {

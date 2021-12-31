@@ -1,6 +1,7 @@
 package airTicket;
 
 import base.BaseTest;
+import generalActions.pay.PayScreen;
 import org.testng.annotations.Test;
 import pages.airTickets.SelectCostAirTicketScreen;
 import pages.airTickets.SelectDadesAirTicketScreen;
@@ -26,9 +27,11 @@ public class BuyAirTicketTest extends BaseTest {
         costAirTicket.clickAddPassengerBtn();
         costAirTicket.clickNextBtn();
         costAirTicket.clickNextBtn();
-        costAirTicket.selectMethodOfPayment();
-        costAirTicket.fillCVVField();
-        costAirTicket.onSwitchAgreeToTerms();
-        costAirTicket.tapPayBtn();
+        //costAirTicket.selectMethodOfPayment();
+        //costAirTicket.fillCVVField();
+        //costAirTicket.onSwitchAgreeToTerms();
+        //costAirTicket.tapPayBtn();
+        PayScreen payScreen = costAirTicket.selectMethodOfPayment();
+        payScreen.paySavedBankCard();
     }
 }

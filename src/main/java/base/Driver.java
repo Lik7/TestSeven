@@ -32,5 +32,14 @@ public class Driver {
     public static int getWaitSec() {
         return waitSec;
     }
+
+    public static AndroidDriver driverTimeout_1sec() {
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        return driver;
+    }
+    public static AndroidDriver driverTimeoutDefault() {
+        driver.manage().timeouts().implicitlyWait(waitSec, TimeUnit.SECONDS);
+        return driver;
+    }
 }
 

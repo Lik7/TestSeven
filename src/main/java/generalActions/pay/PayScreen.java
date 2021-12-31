@@ -20,6 +20,8 @@ public class PayScreen {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
+    Swipes swipe = new Swipes();
+
     @AndroidFindBy(id = "ru.s7.android:id/btnChoosePaymentType")
     private MobileElement methodsOfPaymentBtn;//кнопка Способы оплаты на экране Оплата
 
@@ -37,22 +39,22 @@ public class PayScreen {
 
     @Step("Выбираю способ оплаты банковской картой")
     public void selectMethodOfPaymentIsCard() {
+        swipe.scrollToElementDown("//android.widget.EditText[@resource-id='ru.s7.android:id/paymentCardName']", 3);
         selectMethodOfPayment(1);
     }
 
     @Step("Заполняю поле CVV/CVC2")
     public void fillCVVField() {
-        Swipes sp = new Swipes();
+
         //String df = "//android.widget.TextView[@resource-id='ru.s7.android:id/etPaymentCardCVV']";
-        sp.scrollToElementDown("//android.widget.EditText[@resource-id='ru.s7.android:id/etPaymentCardCVV']", 10);
+        swipe.scrollToElementDown("//android.widget.EditText[@resource-id='ru.s7.android:id/etPaymentCardCVV']", 10);
         CVVField.sendKeys("123");
     }
 
     @Step("Включаю свич согласия с условиями")
     public void onSwitchAgreeToTerms() {
         Switch sw = new Switch();
-        Swipes sp = new Swipes();
-        sp.scrollDown();
+        swipe.scrollDown();
         sw.switchON(switchLocatorID);
     }
 
@@ -61,12 +63,12 @@ public class PayScreen {
         payBtn.click();
     }
 
-    @Step("Заполняю реквизиты оплаты банковской картой")
+    @Step("Заполняю реквизиты оплаты банковской картой. Карта сохранена в приложении")
     public void paySavedBankCard() {
         selectMethodOfPaymentIsCard();
         fillCVVField();
         onSwitchAgreeToTerms();
-        tapPayBtn();
+        //tapPayBtn();
     }
 
 

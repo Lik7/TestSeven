@@ -29,6 +29,10 @@ public enum Dates {
         ds.tapDayStartInCalendar(tomorrow);
     }
 
+    public void startInFiveDays() {
+        ds.tapDayStartInCalendar(addFiveDays);
+    }
+
 
     public int addFiveDays() {
         return addFiveDays;

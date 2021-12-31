@@ -93,6 +93,7 @@ public class Swipes {
     //Скролл до элемента
     private void swipeToElement(String xPathLocator, int countOfSwipes, boolean b) {
         int alreadySwiped = 0;//Кол-во сделанных свайпов
+
         while (countDisplayOfElements(xPathLocator) == 0) {
             if (alreadySwiped > countOfSwipes) {
                 return;
@@ -102,7 +103,8 @@ public class Swipes {
             } else scrollUp();
             ++alreadySwiped;
         }
-        driver.manage().timeouts().implicitlyWait(Driver.getWaitSec(), TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(Driver.getWaitSec(), TimeUnit.SECONDS);
+        Driver.driverTimeoutDefault();
     }
 
 
@@ -131,7 +133,7 @@ public class Swipes {
         driver.manage().timeouts().implicitlyWait(Driver.getWaitSec(), TimeUnit.SECONDS);
     }
 
-    //****ДОПИСАТЬ*** свап до элемента без pull to refresh
+    //свап до элемента без pull to refresh
     public void scrollUpDownToElement(int countOfSwipes, String... xPathLocator) {
         String str1 = xPathLocator.length > 0 ? xPathLocator[0] : null;
         String str2 = xPathLocator.length > 0 ? xPathLocator[1] : null;
@@ -159,7 +161,8 @@ public class Swipes {
     }
 
     private int countDisplayOfElements(String xPathLocator) {
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        Driver.driverTimeout_1sec();
         return driver.findElements(By.xpath(xPathLocator)).size();
     }
 }

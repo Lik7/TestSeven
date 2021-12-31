@@ -1,5 +1,6 @@
 package pages.airTickets;
 
+import generalActions.pay.PayScreen;
 import helpers.Swipes;
 import helpers.Switch;
 import helpers.Waits;
@@ -74,16 +75,17 @@ public class SelectCostAirTicketScreen {
     }
 
     @Step("Выбираю способ оплаты")
-    public void selectMethodOfPayment() {
+    public PayScreen selectMethodOfPayment() {
         //Waits waits = new Waits();
         if(Waits.elementIsDispXPathLocator("//android.widget.TextView[@text='Оплатить сейчас']")){
             paymentTypePayNowBtn.click();
         }
-        Swipes sp = new Swipes();
+        return new PayScreen(driver);
+        /*Swipes sp = new Swipes();
         sp.scrollToElementDown("//android.widget.RelativeLayout[@resource-id='ru.s7.android:id/btnChoosePaymentType']", 10);
         methodsOfPaymentBtn.click();
         MobileElement mobileElement = methodsOfPaymentList.get(1);
-        mobileElement.click();
+        mobileElement.click();*/
     }
 
     @Step("Заполняю поле CVV/CVC2")

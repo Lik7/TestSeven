@@ -10,7 +10,7 @@ public class Driver {
 
     private static AndroidDriver driver;
     private static String url = "http://127.0.0.1:4723/wd/hub";
-    private static int waitSec = 45;
+    private static int waitSec = 35;
 
     private static void initDriver() {
         try {

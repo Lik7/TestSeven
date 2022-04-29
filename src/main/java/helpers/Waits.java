@@ -1,11 +1,8 @@
 package helpers;
 
 import base.Driver;
-import io.appium.java_client.MobileDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -16,9 +13,15 @@ public class Waits {
     private static AndroidDriver driver = Driver.getDriver();
 
     //Ожидание нужного элемента
-    public WebElement waitForElementPresent(By by, long timeoutInSecond) {
+    /*public WebElement waitForElementPresent(By by, long timeoutInSecond) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeoutInSecond);
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    }*/
+
+    public static void
+    waitForElementPresent(String xPathLocator, long timeoutInSecond) {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeoutInSecond);
+         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xPathLocator)));
     }
 
     //Ожидание нужного элемента
@@ -42,12 +45,14 @@ public class Waits {
 
     //возвращает true если элемент отображается, возвращает false если не отображается
     private static boolean elementIsDisp(String locator) {
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        Driver.driverTimeout_1sec();
         boolean b = true;
         if (driver.findElements(By.xpath(locator)).size() == 0) {
             b = false;
         }
-        driver.manage().timeouts().implicitlyWait(Driver.getWaitSec(), TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(Driver.getWaitSec(), TimeUnit.SECONDS);
+        Driver.driverTimeoutDefault();
         return b;
     }
 

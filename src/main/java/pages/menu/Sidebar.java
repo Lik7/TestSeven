@@ -1,5 +1,6 @@
 package pages.menu;
 
+import helpers.Scroll;
 import helpers.Swipes;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -60,15 +61,16 @@ public class Sidebar {
     }
 
     @Step("Нажимаю кнопку Аэроэкспресс в боковом меню")
-    public AeroExpressScreen clickMenuAeroexpressBtn() {
+    //public AeroExpressScreen clickMenuAeroexpressBtn() {
+    public void clickMenuAeroexpressBtn() {
         menuAeroexpressBtn.click();
-        return new AeroExpressScreen(driver);
+        //return new AeroExpressScreen(driver);
     }
 
     @Step("Нажимаю кнопку Настройки в меню")
     public AppSettings clickSettingBtn() {
         Swipes sw = new Swipes();
-        sw.scrollToElementDown("//androidx.appcompat.widget.LinearLayoutCompat[@resource-id='ru.s7.android:id/navSettings']",10);
+        Scroll.scrollToElementDown("//androidx.appcompat.widget.LinearLayoutCompat[@resource-id='ru.s7.android:id/navSettings']",10);
         menuSettingsBtn.click();
         return new AppSettings(driver);
     }
@@ -76,7 +78,7 @@ public class Sidebar {
     @Step
     public void clickMenuDebugViewsBtn(){
         Swipes swipes = new Swipes();
-        swipes.scrollDownUpToElement("//*[@resource-id='ru.s7.android:id/navDebugViews_']", 3);
+        Scroll.scrollDownUpToElement("//*[@resource-id='ru.s7.android:id/navDebugViews_']", 3);
         menuDebugViewsBtn.click();
     }
 }

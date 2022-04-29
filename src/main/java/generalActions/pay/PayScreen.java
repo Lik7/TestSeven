@@ -1,5 +1,6 @@
 package generalActions.pay;
 
+import helpers.Scroll;
 import helpers.Swipes;
 import helpers.Switch;
 import io.appium.java_client.MobileElement;
@@ -39,7 +40,7 @@ public class PayScreen {
 
     @Step("Выбираю способ оплаты банковской картой")
     public void selectMethodOfPaymentIsCard() {
-        swipe.scrollToElementDown("//android.widget.EditText[@resource-id='ru.s7.android:id/paymentCardName']", 3);
+        Scroll.scrollToElementDown("//android.widget.EditText[@resource-id='ru.s7.android:id/paymentCardName']", 3);
         selectMethodOfPayment(1);
     }
 
@@ -47,14 +48,14 @@ public class PayScreen {
     public void fillCVVField() {
 
         //String df = "//android.widget.TextView[@resource-id='ru.s7.android:id/etPaymentCardCVV']";
-        swipe.scrollToElementDown("//android.widget.EditText[@resource-id='ru.s7.android:id/etPaymentCardCVV']", 10);
+        Scroll.scrollToElementDown("//android.widget.EditText[@resource-id='ru.s7.android:id/etPaymentCardCVV']", 10);
         CVVField.sendKeys("123");
     }
 
     @Step("Включаю свич согласия с условиями")
     public void onSwitchAgreeToTerms() {
         Switch sw = new Switch();
-        swipe.scrollDown();
+        swipe.swipeDown();
         sw.switchON(switchLocatorID);
     }
 

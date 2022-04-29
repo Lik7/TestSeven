@@ -1,6 +1,8 @@
 package pages.airTickets;
 
-import enums.Dates;
+import base.BaseScreen;
+import enums.Days;
+import helpers.DateSelected;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -14,7 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class SelectDadesAirTicketScreen {
+public class SelectDadesAirTicketScreen extends BaseScreen {
     AndroidDriver driver;
 
     public SelectDadesAirTicketScreen(AndroidDriver driver) {
@@ -109,10 +111,13 @@ public class SelectDadesAirTicketScreen {
 
     @Step("Задаю даты вылета и прилета")
     public void selectDepartureArrivalDates() {
-        Dates dates = Dates.DAYS;
+/*        Days dates = Days.DAYS;
         //dates.startTomorrow();
         dates.startInFiveDays();
-        dates.finishInWeek();
+        dates.finishInWeek();*/
+        DateSelected dateSelected = new DateSelected();
+        dateSelected.tapDayStartInCalendar(Days.TODAY);
+        dateSelected.tapDayFinishInCalendar(Days.IN_FIVE_DAYS);
         doneBtnInCalendar.click();
     }
 /*

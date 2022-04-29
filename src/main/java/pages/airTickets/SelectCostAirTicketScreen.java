@@ -1,6 +1,8 @@
 package pages.airTickets;
 
+import base.BaseScreen;
 import generalActions.pay.PayScreen;
+import helpers.Scroll;
 import helpers.Swipes;
 import helpers.Switch;
 import helpers.Waits;
@@ -13,7 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class SelectCostAirTicketScreen {
+public class SelectCostAirTicketScreen extends BaseScreen {
 
     AndroidDriver driver;
 
@@ -99,8 +101,8 @@ public class SelectCostAirTicketScreen {
     @Step("Включаю свич согласия с условиями")
     public void onSwitchAgreeToTerms() {
         Switch sw = new Switch();
-        Swipes sp = new Swipes();
-        sp.scrollToElementDown("//android.widget.Switch[@resource-id='ru.s7.android:id/agree']", 10);
+        //Swipes sp = new Swipes();
+        Scroll.scrollToElementDown("//android.widget.Switch[@resource-id='ru.s7.android:id/agree']", 10);
         sw.switchON(switchLocatorID);
     }
 

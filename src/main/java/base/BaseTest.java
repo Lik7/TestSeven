@@ -8,29 +8,28 @@ import org.openqa.selenium.TakesScreenshot;
 
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import pages.HomeScreen;
+import pages.home.HomeScreen;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Calendar;
 
 import static com.codeborne.selenide.Selenide.sleep;
 
 @Listeners(AllureScreenShooter.class)
 
-public class BaseTest {
+public class BaseTest extends BaseScreen{
     private AndroidDriver driver;
     protected HomeScreen homeScreen;
 
     @BeforeClass
     public void setUpDriver() {
         AppiumServer.startServer();
-        driver = Driver.getDriver();
-        homeScreen = new HomeScreen(driver);
+       // driver = Driver.getDriver();
+        //homeScreen = new HomeScreen(driver);
         driver.startRecordingScreen();
     }
 

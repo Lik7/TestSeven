@@ -1,5 +1,6 @@
 package pages.rentalCar;
 
+import enums.Days;
 import helpers.DateSelected;
 import helpers.HideKeyboardIfVisible;
 import helpers.Swipes;
@@ -93,17 +94,17 @@ public class RentalCarScreen {
         dateOfReceiptField.click();
         //slidersReceiptReturn.get(0).isDisplayed();//тоже рабочий вариант
         Waits waits = new Waits();
-        waits.waitForElementPresent(By.id("ru.s7.android:id/seekBar"), 5);
+        //waits.waitForElementPresent(By.id("ru.s7.android:id/seekBar"), 5);
     }
 
     @Step("Выбор даты получения")
     public void selectDateReceiptOfCar() {
-        dateSelected.tapDayStartInCalendar(0);
+        dateSelected.tapDayStartInCalendar(Days.TOMORROW);
     }
 
     @Step("Выбор даты возврата")
     public void selectDateReturnOfCar(Integer n) {
-        dateSelected.tapDayFinishInCalendar(n);
+        dateSelected.tapDayFinishInCalendar(Days.IN_FIVE_DAYS);
     }
 
     @Step("Ввод времени получения")

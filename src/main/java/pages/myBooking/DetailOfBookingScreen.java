@@ -1,5 +1,6 @@
 package pages.myBooking;
 
+import helpers.Scroll;
 import helpers.Swipes;
 import helpers.Waits;
 import io.appium.java_client.MobileElement;
@@ -54,20 +55,20 @@ public class DetailOfBookingScreen {
     @Step("Тап по баннеру АЕ")
     public AddBuyAEScreen fieldAEInBannerAEClick() {
         //Swipes swipe = new Swipes();
-        swipe.scrollToElementDown(fieldAeroexpress, 10);
+        Scroll.scrollToElementDown(fieldAeroexpress, 10);
         fieldAeroexpressInBannerAE.click();
         return new AddBuyAEScreen(driver);
     }
 
     @Step("Проверяю, что АЕ добавлен в бронь")
     public boolean aeroexpressIconIsDisp() {
-        swipe.scrollUpDownToElement(3, "//*[@resource-id='ru.s7.android:id/flAeroexpressIcon']", "//*[@resource-id='ru.s7.android:id/pnrLabel']");
+        Scroll.scrollUpDownToElement(3, "//*[@resource-id='ru.s7.android:id/flAeroexpressIcon']", "//*[@resource-id='ru.s7.android:id/pnrLabel']");
         return Waits.elementIsDispIDLocator(AEIconID);
     }
 
     @Step("Скролл до названия блока Спокойствие в поезке")
     public void scrollToPeaceInTripText() {
-        swipe.scrollDownUpToElement("//android.widget.TextView[@text='Спокойствие в поездке']", 5);
+        Scroll.scrollDownUpToElement("//android.widget.TextView[@text='Спокойствие в поездке']", 5);
     }
 
     @Step("Скролл в слайдере страховок")
@@ -101,7 +102,7 @@ public class DetailOfBookingScreen {
     @Step("Проверяю, что страховка куплена")
     public boolean payedInsuranceIsDisp(String insurance) {
         String fieldPayedInsurance = "//android.widget.TextView[contains(@resource-id,'ru.s7.android:id/tvProductName') and @text='" + insurance + "']";
-        swipe.scrollDownUpToElement(fieldPayedInsurance, 5);
+        Scroll.scrollDownUpToElement(fieldPayedInsurance, 5);
 
         //System.out.println("текст локатора: " + fieldPayedInsurance);
         return Waits.elementIsDispXPathLocator(fieldPayedInsurance);

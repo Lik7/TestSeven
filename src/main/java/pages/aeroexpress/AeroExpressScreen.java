@@ -1,23 +1,18 @@
 package pages.aeroexpress;
 
+import base.BaseScreen;
+import enums.Days;
 import generalActions.pay.PayScreen;
 import helpers.DateSelected;
+import helpers.Switch;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
-import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 //экран АЕ из бокового меню
-public class AeroExpressScreen {
-
-    private AndroidDriver driver;
-
-    public AeroExpressScreen(AndroidDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-    }
+public class AeroExpressScreen extends BaseScreen {
 
     @AndroidFindBy(id = "ru.s7.android:id/tvStartDate")
     private MobileElement thereField;//поле Туда
@@ -43,14 +38,14 @@ public class AeroExpressScreen {
     @AndroidFindBy(xpath = "//android.widget.EditText[@text='Email']")
     private MobileElement emailInContactField; //поле Email в блоке Контакты
 
-   /* @AndroidFindBy(id = "ru.s7.android:id/btnChoosePaymentType")
+    @AndroidFindBy(id = "ru.s7.android:id/btnChoosePaymentType")
     private MobileElement methodsOfPaymentBtn;//кнопка Способы оплаты на экране Оплата
 
     @AndroidFindBy(id = "ru.s7.android:id/paymentCardName")
     private List<MobileElement> methodsOfPaymentList;//список способов оплаты
 
     @AndroidFindBy(id = "ru.s7.android:id/etPaymentCardCVV")
-    private MobileElement CVVField;//поле CVV/CVC2*/
+    private MobileElement CVVField;//поле CVV/CVC2
 
     @AndroidFindBy(xpath = "//android.widget.TextView[contains(@resource-id, 'ru.s7.android:id/btnNext')and @text=\"Оплатить\"]")
     private MobileElement payBtn; //кнопка Оплатить
@@ -67,7 +62,7 @@ public class AeroExpressScreen {
 
     DateSelected dateSelected = new DateSelected();
 
-    //String switchLocatorID = "ru.s7.android:id/agree";
+    String switchLocatorID = "ru.s7.android:id/agree";
     private String bookingNumberOfAE = null;
 
     @Step("Тап в поле Туда")
@@ -82,7 +77,7 @@ public class AeroExpressScreen {
 
     @Step("Выбор даты возврата")
     public void selectDateBack(Integer n) {
-        dateSelected.tapDayFinishInCalendar(n);
+        dateSelected.tapDayFinishInCalendar(Days.IN_FIVE_DAYS);
     }
 
     @Step("Нажать кнопку К выбору пассажиров")
@@ -119,7 +114,7 @@ public class AeroExpressScreen {
         emailInContactField.sendKeys("kanst2016@gmail.com");
     }
 
-/*    @Step("")
+    @Step("")
     public void clickMethodsOfPaymentBtn() {
         methodsOfPaymentBtn.click();
     }
@@ -133,19 +128,17 @@ public class AeroExpressScreen {
 
     @Step("Заполняю поле CVV/CVC2")
     public void fillCVVField() {
-        Swipes sp = new Swipes();
-        //String df = "//android.widget.TextView[@resource-id='ru.s7.android:id/etPaymentCardCVV']";
-        sp.swipeUpToElement("//android.widget.EditText[@resource-id='ru.s7.android:id/etPaymentCardCVV']");
+        scroll.scrollToElementDown("//android.widget.EditText[@resource-id='ru.s7.android:id/etPaymentCardCVV']", 5);
         CVVField.sendKeys("123");
-    }*/
+    }
 
-/*    @Step("Включаю свич согласия с условиями")
+    @Step("Включаю свич согласия с условиями")
     public void onSwitchAgreeToTerms() {
         Switch sw = new Switch();
-        Swipes sp = new Swipes();
-        sp.swipeUpToElement("//android.widget.Switch[@resource-id='ru.s7.android:id/agree']");
+        //Swipes sp = new Swipes();
+        scroll.scrollToElementDown("//android.widget.Switch[@resource-id='ru.s7.android:id/agree']", 5);
         sw.switchON(switchLocatorID);
-    }*/
+    }
 
     @Step("Заполняю реквизиты оплаты банковской картой")
     public void fillPaymentDetails(){

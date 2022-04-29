@@ -11,12 +11,12 @@ public class BuyAirTicketTest extends BaseTest {
 
     @Test(description = "Покупка билета")
     public void buyAirTicketTest() {
-        Sidebar sidebar = homeScreen.clickMenuBtn();
+       /* Sidebar sidebar = homeScreen.clickMenuBtn();
         SelectDadesAirTicketScreen airTicket = sidebar.clickMenuAirTicketsBtn();
 /*        airTicket.clickDepartureCity();
         airTicket.selectAirportOfDeparture();
         airTicket.clickArrivalCity();
-        airTicket.selectAirportOfArrival();*/
+        airTicket.selectAirportOfArrival();
         airTicket.clickDepartureDate();
         airTicket.selectDepartureArrivalDates();
         SelectCostAirTicketScreen costAirTicket = airTicket.clickSearchBtn();
@@ -32,6 +32,6 @@ public class BuyAirTicketTest extends BaseTest {
         //costAirTicket.onSwitchAgreeToTerms();
         //costAirTicket.tapPayBtn();
         PayScreen payScreen = costAirTicket.selectMethodOfPayment();
-        payScreen.paySavedBankCard();
+        payScreen.paySavedBankCard();*/
     }
 }

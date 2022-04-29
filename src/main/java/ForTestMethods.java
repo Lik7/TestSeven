@@ -1,10 +1,7 @@
-import enums.Dates;
-import enums.Insurance;
-import helpers.Swipes;
-import sun.security.mscapi.CPublicKey;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ForTestMethods {
 
@@ -18,11 +15,20 @@ public class ForTestMethods {
         String selectedReceiptDate = dateTime.format(formatter);
         System.out.println("Test - " + selectedReceiptDate);*/
 
+/*
+        String str = "123 By";
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(str);
+        if (m.find()) {
+            System.out.println(m.group());
+        }*/
 
-
+String price = "123 By";
+getPrice("123 By");
+        System.out.println(getPrice("123 By"));
 
         //Insurance insurance = Insurance.MEDICAL_INSURANCE;
-        System.out.println(Insurance.MEDICAL_INSURANCE.getInsuranceName());
+        //System.out.println(Insurance.MEDICAL_INSURANCE.getInsuranceName());
 
 
     /*public static void main(String[] args) throws InterruptedException {
@@ -36,6 +42,19 @@ public class ForTestMethods {
 
     }
 //}
+
+    public static int getPrice(String price) {
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(price);
+        String str = null;
+        if (m.find()) {
+            //System.out.println(m.group());
+            str = m.group();
+        }
+        //System.out.println("Цена из класса Ticket " + price);
+        return Integer.parseInt(str);
+    }
+
 
     public void data() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM");

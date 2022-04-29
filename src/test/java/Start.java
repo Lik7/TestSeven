@@ -17,11 +17,11 @@ public class Start extends BaseTest {
         enter.tapEnterBtn();
     }*/
 
-    @Test
+   /* @Test
     public void s(){
         Sidebar sidebar = homeScreen.clickMenuBtn();
         //sidebar.clickMenuAutoBtn();
         sidebar.clickMenuDebugViewsBtn();
         //sidebar.clickSettingBtn();
-    }
+    }*/
 }

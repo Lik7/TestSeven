@@ -1,7 +1,9 @@
 package aeroexpress;
 
+import base.BaseTest;
 import enums.Days;
 import helpers.DateSelected;
+import io.appium.java_client.AppiumDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.aeroexpress.AeroExpressScreen;
@@ -9,12 +11,12 @@ import pages.buy.BuyScreen;
 import pages.home.HomeScreen;
 import pages.trips.TripsScreen;
 
-public class AeroExpressTest extends HomeScreen {
+public class AeroExpressTest extends BaseTest {
 
     @Test(description = "Покупка билета на АЕ стенделон. Пользователь залогирован, банковская карта сохранена")
     public void buyingAETicketSATest() {
 
-        clickBuyBottom();
+        homeScreen.clickBuyBottom();
         BuyScreen buy = new BuyScreen();
         buy.clickAeChips();
         AeroExpressScreen aeroExpressScreen = new AeroExpressScreen();

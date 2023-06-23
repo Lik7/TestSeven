@@ -1,8 +1,10 @@
 package base;
 
 import helpers.AllureScreenShooter;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
-import org.apache.commons.io.FileUtils;
+//import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.core.util.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -18,26 +20,33 @@ import java.util.Arrays;
 import java.util.Calendar;
 
 import static com.codeborne.selenide.Selenide.sleep;
+import static com.sun.deploy.cache.Cache.copyFile;
+import static org.apache.logging.log4j.core.util.FileUtils.*;
 
 @Listeners(AllureScreenShooter.class)
 
-public class BaseTest extends BaseScreen{
-    private AndroidDriver driver;
+public class BaseTest {
+    //protected AndroidDriver driver;
+    protected AppiumDriver driver;
     protected HomeScreen homeScreen;
 
     @BeforeClass
     public void setUpDriver() {
-        AppiumServer.startServer();
-       // driver = Driver.getDriver();
-        //homeScreen = new HomeScreen(driver);
-        driver.startRecordingScreen();
+        //AppiumServer.startServer();
+        //AppiumServer.startServerCMD();
+        //AppiumServerManager.stopServerCMD();
+        AppiumServerManager.getAppiumLocalServer();
+        driver = Driver.getDriver();
+        homeScreen = new HomeScreen(driver);
+        //driver.startRecordingScreen();
     }
 
     @AfterClass
     public void teardown() {
         sleep(3000);
-        driver.closeApp();
-        AppiumServer.stopServer();
+        //driver.closeApp();
+        //ControlApp.terminateApp();
+        AppiumServerManager.stopServer();
     }
 
     @AfterMethod
@@ -46,7 +55,7 @@ public class BaseTest extends BaseScreen{
             DateFormat dateFormat = new SimpleDateFormat("dd_MM-HH_mm_ss");
             Calendar cal = Calendar.getInstance();
             File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(scrFile, new File("errorScreenshots\\" + testResult.getName() + "-"
+            copyFile(scrFile, new File("errorScreenshots\\" + testResult.getName() + "-"
                     + Arrays.toString(testResult.getParameters()) + dateFormat.format(cal.getTime()) + ".png"));
         }
     }
@@ -62,3 +71,26 @@ public class BaseTest extends BaseScreen{
         AllureScreenShooter.attachRecord(mp4);
     }*/
 }
+
+/* ОСТАНОВКА ПРИЛОЖЕНИЯ
+    @Step("Terminate app")
+    public AppDriver terminateApp() {
+        Logger.log();
+        String appID = null;
+        if (driver != null) {
+            try {
+                if (driver instanceof AndroidDriver) {
+                    appID = (String) driver.getCapabilities().getCapability(AndroidMobileCapabilityType.APP_PACKAGE);
+                } else if (driver instanceof IOSDriver) {
+                    appID = String.valueOf(driver.getCapabilities().getCapability(IOSMobileCapabilityType.BUNDLE_ID));
+                } else
+                    Assert.fail(createAssertionLog("unknown driver type"));
+                if (appID != null)
+                    ((InteractsWithApps) driver).terminateApp(appID);
+            } catch (Exception e) {
+                Logger.logError(e.getMessage());
+            }
+        }
+        return this;
+    }
+ */

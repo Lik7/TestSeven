@@ -1,12 +1,14 @@
 package helpers;
 
 import base.Driver;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 
 public class Scroll extends Swipes {
 
-    private static AndroidDriver driver = Driver.getDriver();
+    //private static AndroidDriver driver = Driver.getDriver();
+    private static AppiumDriver driver = Driver.getDriver();
 
     //Скролл до элемена вниз
     public static void scrollToElementDown(String xPathLocator, int countOfSwipes) {
@@ -67,7 +69,7 @@ public class Scroll extends Swipes {
         int maxDownSwipes = countOfSwipes * 3;
 
         while (countDisplayOfElements(str1) == 0) {
-            if (alreadySwiped == maxUpSwipes || Waits.elementIsDispXPathLocator(str2)) {
+            if (alreadySwiped == maxUpSwipes || ElementIsMissing.elementIsDispXPathLocator(str2)) {
                 //waits.waitForElementPresent(By.xpath(xPathLocator), 1);
                 while (countDisplayOfElements(str1) == 0) {
                     if (alreadySwiped > maxDownSwipes) {

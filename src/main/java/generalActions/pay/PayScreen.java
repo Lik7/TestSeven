@@ -3,11 +3,11 @@ package generalActions.pay;
 import helpers.Scroll;
 import helpers.Swipes;
 import helpers.Switch;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
@@ -24,16 +24,16 @@ public class PayScreen {
     Swipes swipe = new Swipes();
 
     @AndroidFindBy(id = "ru.s7.android:id/btnChoosePaymentType")
-    private MobileElement methodsOfPaymentBtn;//кнопка Способы оплаты на экране Оплата
+    private WebElement methodsOfPaymentBtn;//кнопка Способы оплаты на экране Оплата
 
     @AndroidFindBy(id = "ru.s7.android:id/paymentCardName")
-    private List<MobileElement> methodsOfPaymentList;//список способов оплаты
+    private List<WebElement> methodsOfPaymentList;//список способов оплаты
 
     @AndroidFindBy(id = "ru.s7.android:id/etPaymentCardCVV")
-    private MobileElement CVVField;//поле CVV/CVC2
+    private WebElement CVVField;//поле CVV/CVC2
 
     @AndroidFindBy(xpath = "//android.widget.TextView[contains(@resource-id, 'ru.s7.android:id/btnNext')and @text=\"Оплатить\"]")
-    private MobileElement payBtn; //кнопка Оплатить
+    private WebElement payBtn; //кнопка Оплатить
 
     String switchLocatorID = "ru.s7.android:id/agree";
 
@@ -76,7 +76,7 @@ public class PayScreen {
     //метод выбирает способ оплаты из списка карт
     private void selectMethodOfPayment(Integer i) {
         methodsOfPaymentBtn.click();
-        MobileElement mobileElement = methodsOfPaymentList.get(i);
-        mobileElement.click();
+        WebElement WebElement = methodsOfPaymentList.get(i);
+        WebElement.click();
     }
 }

@@ -5,9 +5,10 @@ import enums.Days;
 import generalActions.pay.PayScreen;
 import helpers.DateSelected;
 import helpers.Switch;
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
@@ -15,49 +16,49 @@ import java.util.List;
 public class AeroExpressScreen extends BaseScreen {
 
     @AndroidFindBy(id = "ru.s7.android:id/tvStartDate")
-    private MobileElement thereField;//поле Туда
+    private WebElement thereField;//поле Туда
 
     @AndroidFindBy(id = "ru.s7.android:id/tvEndDate")
-    private MobileElement backField;//поле Обратно
+    private WebElement backField;//поле Обратно
 
     @AndroidFindBy(id = "ru.s7.android:id/btnSave")
-    private MobileElement choiceOfPassengersBtn;//кнопка К выбору пассажиров
+    private WebElement choiceOfPassengersBtn;//кнопка К выбору пассажиров
 
     @AndroidFindBy(id = "ru.s7.android:id/btnNext")
-    private MobileElement nextBtn;//кнопка Далее на экране Пассажиры
+    private WebElement nextBtn;//кнопка Далее на экране Пассажиры
 
     @AndroidFindBy(xpath = "//android.widget.EditText[@text='Имя латиницей']")
-    private MobileElement nameInContactField; //поле Имя латиницей в блоке Контакты
+    private WebElement nameInContactField; //поле Имя латиницей в блоке Контакты
 
     @AndroidFindBy(xpath = "//android.widget.EditText[@text='Фамилия латиницей']")
-    private MobileElement surnameInContactField; //поле Фамилия латиницей в блоке Контакты
+    private WebElement surnameInContactField; //поле Фамилия латиницей в блоке Контакты
 
     @AndroidFindBy(xpath = "//android.widget.EditText[@text='Телефон']")
-    private MobileElement telephoneInContactField; //поле Телефон в блоке Контакты
+    private WebElement telephoneInContactField; //поле Телефон в блоке Контакты
 
     @AndroidFindBy(xpath = "//android.widget.EditText[@text='Email']")
-    private MobileElement emailInContactField; //поле Email в блоке Контакты
+    private WebElement emailInContactField; //поле Email в блоке Контакты
 
     @AndroidFindBy(id = "ru.s7.android:id/btnChoosePaymentType")
-    private MobileElement methodsOfPaymentBtn;//кнопка Способы оплаты на экране Оплата
+    private WebElement methodsOfPaymentBtn;//кнопка Способы оплаты на экране Оплата
 
     @AndroidFindBy(id = "ru.s7.android:id/paymentCardName")
-    private List<MobileElement> methodsOfPaymentList;//список способов оплаты
+    private List<WebElement> methodsOfPaymentList;//список способов оплаты
 
     @AndroidFindBy(id = "ru.s7.android:id/etPaymentCardCVV")
-    private MobileElement CVVField;//поле CVV/CVC2
+    private WebElement CVVField;//поле CVV/CVC2
 
     @AndroidFindBy(xpath = "//android.widget.TextView[contains(@resource-id, 'ru.s7.android:id/btnNext')and @text=\"Оплатить\"]")
-    private MobileElement payBtn; //кнопка Оплатить
+    private WebElement payBtn; //кнопка Оплатить
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id='ru.s7.android:id/tvSuccessTitle' and @text='Оплачено']")
-    private MobileElement valueTitleStatus; //текст статуса
+    private WebElement valueTitleStatus; //текст статуса
 
     @AndroidFindBy(id = "ru.s7.android:id/tvBookingNumber")
-    private MobileElement bookingNumberField; //строка с номером брони
+    private WebElement bookingNumberField; //строка с номером брони
 
     @AndroidFindBy(id = "ru.s7.android:id/btnGoToTrip")
-    private MobileElement goToMyS7Btn; //кнопка Перейти в My S7
+    private WebElement goToMyS7Btn; //кнопка Перейти в My S7
 
 
     DateSelected dateSelected = new DateSelected();
@@ -122,8 +123,8 @@ public class AeroExpressScreen extends BaseScreen {
     @Step("Выбираю способ оплаты")
     public void selectMethodOfPayment(Integer i) {
         methodsOfPaymentBtn.click();
-        MobileElement mobileElement = methodsOfPaymentList.get(i);
-        mobileElement.click();
+        WebElement WebElement = methodsOfPaymentList.get(i);
+        WebElement.click();
     }
 
     @Step("Заполняю поле CVV/CVC2")
@@ -142,7 +143,7 @@ public class AeroExpressScreen extends BaseScreen {
 
     @Step("Заполняю реквизиты оплаты банковской картой")
     public void fillPaymentDetails(){
-        PayScreen payScreen = new PayScreen(driver);
+        PayScreen payScreen = new PayScreen((AndroidDriver) driver);
         payScreen.selectMethodOfPaymentIsCard();
         payScreen.fillCVVField();
         payScreen.onSwitchAgreeToTerms();
@@ -156,7 +157,7 @@ public class AeroExpressScreen extends BaseScreen {
     @Step("Нажимаю кнопку Перейти в My S7")
     public TripAEScreen clickGoToMyS7Btn() {
         goToMyS7Btn.click();
-        return new TripAEScreen(driver);
+        return new TripAEScreen((AndroidDriver) driver);
     }
 
     private void setBookingNumberField() {

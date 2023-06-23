@@ -1,26 +1,26 @@
 package pages.home;
 
 import base.BaseScreen;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebElement;
 
 public class BottomNavigationMenu extends BaseScreen {
 
     @AndroidFindBy(id = "ru.s7.android:id/page_1")
-    private MobileElement homeBottom;//кнопка Главная
+    private WebElement homeBottom;//кнопка Главная
 
     @AndroidFindBy(id = "ru.s7.android:id/page_2")
-    private MobileElement tripsBottom;//кнопка Путешествия
+    private WebElement tripsBottom;//кнопка Путешествия
 
     @AndroidFindBy(id = "ru.s7.android:id/page_3")
-    private MobileElement buyBottom;//кнопка Купить
+    private WebElement buyBottom;//кнопка Купить
 
     @AndroidFindBy(id = "ru.s7.android:id/page_4")
-    private MobileElement messagesBottom;//кнопка Сообщения
+    private WebElement messagesBottom;//кнопка Сообщения
 
     @AndroidFindBy(id = "ru.s7.android:id/page_5")
-    private MobileElement profileBottom;//кнопка Профиль
+    private WebElement profileBottom;//кнопка Профиль
 
 
     @Step("Нажимаю кнопку Главная")

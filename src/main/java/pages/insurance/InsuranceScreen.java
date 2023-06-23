@@ -1,11 +1,11 @@
 package pages.insurance;
 
 import generalActions.pay.PayScreen;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 public class InsuranceScreen {
@@ -17,10 +17,10 @@ public class InsuranceScreen {
     }
 
     @AndroidFindBy(id = "ru.s7.android:id/rlBackground")
-    private MobileElement addBtn;//кнопка Добавить в мод. окне страховки
+    private WebElement addBtn;//кнопка Добавить в мод. окне страховки
 
     @AndroidFindBy(id ="ru.s7.android:id/yes")
-    private MobileElement OKBtn;//кнопка ОК в поп-ап результата
+    private WebElement OKBtn;//кнопка ОК в поп-ап результата
 
     @Step("Тап по кнопке Добавить в мод. окне страховки")
     public PayScreen addBtnClick(){

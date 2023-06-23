@@ -5,7 +5,6 @@ import helpers.DateSelected;
 import helpers.HideKeyboardIfVisible;
 import helpers.Swipes;
 import helpers.Waits;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -31,43 +30,43 @@ public class RentalCarScreen {
     }
 
     @AndroidFindBy(id = "ru.s7.android:id/tvPickupLocation")
-    private MobileElement placeOfReceiptField;//поле Место получения
+    private WebElement placeOfReceiptField;//поле Место получения
 
     @AndroidFindBy(id = "ru.s7.android:id/tvReturnLocation")
-    private MobileElement placeOfReturnField;//поле Место возврата
+    private WebElement placeOfReturnField;//поле Место возврата
 
     @AndroidFindBy(id = "ru.s7.android:id/scReturnSamePlace")
-    private MobileElement returnInSamePlaceSwitch;//свич Возврат там же
+    private WebElement returnInSamePlaceSwitch;//свич Возврат там же
 
     @AndroidFindBy(id = "ru.s7.android:id/tvPickUpDateLabel")
-    private MobileElement dateOfReceiptField;//поле Дата получения
+    private WebElement dateOfReceiptField;//поле Дата получения
 
     @AndroidFindBy(id = "ru.s7.android:id/etLocation")
-    private MobileElement searchFromField;//поле Откуда на экране выбора Локации
+    private WebElement searchFromField;//поле Откуда на экране выбора Локации
 
     @AndroidFindBy(id = "ru.s7.android:id/seekBar")
-    private List<MobileElement> slidersReceiptReturn;//слайдеры времени на экране календаря
+    private List<WebElement> slidersReceiptReturn;//слайдеры времени на экране календаря
 
     @AndroidFindBy(id = "ru.s7.android:id/btnSave")
-    private MobileElement selectBtn;//Кнопка Выбрать в календаре
+    private WebElement selectBtn;//Кнопка Выбрать в календаре
 
     @AndroidFindBy(id = "ru.s7.android:id/rlBackground")
-    private MobileElement searchBtn;//Кнопка Найти на экране формы аренды авто
+    private WebElement searchBtn;//Кнопка Найти на экране формы аренды авто
 
     @AndroidFindBy(id = "ru.s7.android:id/tvPickUpDate")
-    private MobileElement selectedReceiptDate;//для проверки: выбранная дата получения
+    private WebElement selectedReceiptDate;//для проверки: выбранная дата получения
 
     @AndroidFindBy(id = "ru.s7.android:id/tvPickUpTime")
-    private MobileElement selectedReceiptTime;//для проверки: выбранное время получения
+    private WebElement selectedReceiptTime;//для проверки: выбранное время получения
 
     @AndroidFindBy(id = "ru.s7.android:id/tvDropOfDate")
-    private MobileElement selectedReturnDate;//для проверки: выбранная дата возврата
+    private WebElement selectedReturnDate;//для проверки: выбранная дата возврата
 
     @AndroidFindBy(id = "ru.s7.android:id/tvDropOfTime")
-    private MobileElement selectedReturnTime;//для проверки: выбранное время возврата
+    private WebElement selectedReturnTime;//для проверки: выбранное время возврата
 
     @AndroidFindBy(id = "ru.s7.android:id/message")
-    private MobileElement messageDateNotSelected;//для проверки: выбранное время возврата
+    private WebElement messageDateNotSelected;//для проверки: выбранное время возврата
 
     private int todayDayInt = java.time.LocalDate.now().get(ChronoField.DAY_OF_MONTH); // число сегодня в int
 

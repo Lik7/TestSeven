@@ -1,10 +1,10 @@
 package pages.rentalCar;
 
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 public class BuyOrBookCarScreen {
@@ -17,10 +17,10 @@ public class BuyOrBookCarScreen {
     }
 
     @AndroidFindBy(id = "ru.s7.android:id/tvTitle")
-    private MobileElement titleName;//Название экрана
+    private WebElement titleName;//Название экрана
 
     @AndroidFindBy(xpath = "//android.view.View[@text='Выбор авто']")
-    private MobileElement nameOfBlockSelectionCar;//название блока Выбор авто
+    private WebElement nameOfBlockSelectionCar;//название блока Выбор авто
 
     @Step("Получение название экрана")
     public String getTitleName(){

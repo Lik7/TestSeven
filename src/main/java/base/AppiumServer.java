@@ -5,7 +5,7 @@ import io.appium.java_client.service.local.AppiumServiceBuilder;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-
+// *** СТАРАЯ ВЕРСИЯ. НОВАЯ ВЕРСИЯ AppiumServerManager
 public class AppiumServer {
 
     //private AppiumDriverLocalService service;
@@ -72,7 +72,7 @@ public class AppiumServer {
     }
 
     //Запуск сервера через командную строку
-    public void startServerCMD() {
+    public static void startServerCMD() {
         Runtime runtime = Runtime.getRuntime();
         try {
             runtime.exec("cmd.exe /c start cmd.exe /k \"appium -a 127.0.0.1 -p 4723\"");

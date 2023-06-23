@@ -1,11 +1,11 @@
 package pages.aeroexpress;
 
 import generalActions.pay.PayScreen;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 public class AddBuyAEScreen {
@@ -18,13 +18,13 @@ public class AddBuyAEScreen {
     }
 
     @AndroidFindBy(id = "ru.s7.android:id/btnNext")
-    private MobileElement safeBtn;//кнопка Сохранить/Далее
+    private WebElement safeBtn;//кнопка Сохранить/Далее
 
     @AndroidFindBy(xpath = "//android.widget.TextView[contains(@resource-id,\"ru.s7.android:id/btnNext\") and @text=\"Оплатить\"]")
-    private MobileElement payBtn;//кнопка Оплатить на экране оплаты
+    private WebElement payBtn;//кнопка Оплатить на экране оплаты
 
     @AndroidFindBy(id ="ru.s7.android:id/yes")
-    private MobileElement OKBtn;//кнопка ОК в поп-ап результата
+    private WebElement OKBtn;//кнопка ОК в поп-ап результата
 
 
     @Step("Тап по кнопке Сохранить / Далее")

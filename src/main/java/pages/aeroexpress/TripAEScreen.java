@@ -1,9 +1,9 @@
 package pages.aeroexpress;
 
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 //бронь АЕ (детали)
 public class TripAEScreen {
@@ -15,7 +15,7 @@ public class TripAEScreen {
     }
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id='ru.s7.android:id/tvTitle' and @text='Аэроэкспресс']")
-    private MobileElement nameTitleScreen;//название экрана
+    private WebElement nameTitleScreen;//название экрана
 
     public String getNameScreen (){
         return nameTitleScreen.getText();

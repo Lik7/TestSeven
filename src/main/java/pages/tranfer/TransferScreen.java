@@ -2,9 +2,7 @@ package pages.tranfer;
 
 import helpers.AllureScreenShooter;
 import helpers.HideKeyboardIfVisible;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
@@ -37,22 +35,22 @@ public class TransferScreen {
     }
 
     @AndroidFindBy(id = "ru.s7.android:id/etStartPlace")
-    private MobileElement fromField;//поле Откуда на экране с картой
+    private WebElement fromField;//поле Откуда на экране с картой
 
     @AndroidFindBy(id = "ru.s7.android:id/etFinishPlace")
-    private AndroidElement whereField;//поле Куда на экране с картой
+    private WebElement whereField;//поле Куда на экране с картой
 
     @AndroidFindBy(id = "ru.s7.android:id/rlBackground")
-    private AndroidElement searchTransferBtn;//кнопка Выбрать трансфер в модалке с описанием трансфера
+    private WebElement searchTransferBtn;//кнопка Выбрать трансфер в модалке с описанием трансфера
 
     @AndroidFindBy(id = "ru.s7.android:id/btnClose")
-    private AndroidElement closeBtn;//кнопка Закрыть в блоке примера маршрута
+    private WebElement closeBtn;//кнопка Закрыть в блоке примера маршрута
 
     @AndroidFindBy(id = "ru.s7.android:id/etValue")
-    private List<AndroidElement> searchField;//поля поиска в окне ввода адреса
+    private List<WebElement> searchField;//поля поиска в окне ввода адреса
 
     @AndroidFindBy(xpath = "//android.view.View[@content-desc='Карта Google']/android.view.View")
-    private List<AndroidElement> pingsOnMap;//кол-во пингов на карте
+    private List<WebElement> pingsOnMap;//кол-во пингов на карте
 
   /*@AndroidFindBy(className = "UIAKeyboard")
     private AndroidElement keyboard;*/

@@ -3,9 +3,7 @@ package pages.airTickets;
 import base.BaseScreen;
 import enums.Days;
 import helpers.DateSelected;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
@@ -26,49 +24,49 @@ public class SelectDadesAirTicketScreen extends BaseScreen {
 
     //@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'" + localDate + "')]") //***ДОПИСАТЬ***
     @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'ноя')]")
-    private MobileElement departureDateField;//поле Дата вылета туда
+    private WebElement departureDateField;//поле Дата вылета туда
 
     @AndroidFindBy(id = "ru.s7.android:id/originCity")
-    private MobileElement departureCity;//поле город вылета
+    private WebElement departureCity;//поле город вылета
 
     @AndroidFindBy(id = "ru.s7.android:id/destinationCity")
-    private MobileElement arrivalCity;//поле город прилета
+    private WebElement arrivalCity;//поле город прилета
 
     @AndroidFindBy(id = "ru.s7.android:id/tvTitle")
-    private MobileElement searchField;//поле Поиск
+    private WebElement searchField;//поле Поиск
 
     @AndroidFindBy(id = "ru.s7.android:id/rlBackground")
-    private MobileElement searchBtn;//кнопка Найти
+    private WebElement searchBtn;//кнопка Найти
 
     @AndroidFindBy(id = "ru.s7.android:id/btn_done")
-    private MobileElement doneBtnInCalendar;//кнопка Готово в календаре
+    private WebElement doneBtnInCalendar;//кнопка Готово в календаре
 
     /*@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'₽')]")
-    private List <MobileElement> ticketBlock;//поле Билет
+    private List <WebElement> ticketBlock;//поле Билет
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Прямой']")
-    private List <MobileElement> ticketBlock2;//поле Билет
+    private List <WebElement> ticketBlock2;//поле Билет
 
     @AndroidFindBy(id="ru.s7.android:id/btnNext")
-    private MobileElement nextBtn;//кнопка Далее
+    private WebElement nextBtn;//кнопка Далее
 
     @AndroidFindBy(id = "ru.s7.android:id/circleFrame")
-    private List<MobileElement> addPassengerBtn;//кнопка Добавить пассажира
+    private List<WebElement> addPassengerBtn;//кнопка Добавить пассажира
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Оплатить сейчас']")
-    private MobileElement paymentTypePayNowBtn;//тип оплаты Оплатить сейчас
+    private WebElement paymentTypePayNowBtn;//тип оплаты Оплатить сейчас
 
     @AndroidFindBy(id = "ru.s7.android:id/btnChoosePaymentType")
-    private MobileElement methodsOfPaymentBtn;//кнопка Способы оплаты на экране Оплата
+    private WebElement methodsOfPaymentBtn;//кнопка Способы оплаты на экране Оплата
 
     @AndroidFindBy(id = "ru.s7.android:id/paymentCardName")
-    private List<MobileElement> methodsOfPaymentList;//список способов оплаты
+    private List<WebElement> methodsOfPaymentList;//список способов оплаты
 
     @AndroidFindBy(id = "ru.s7.android:id/etPaymentCardCVV")
-    private MobileElement CVVField;//поле CVV/CVC2
+    private WebElement CVVField;//поле CVV/CVC2
 
     @AndroidFindBy(xpath = "//android.widget.TextView[contains(@resource-id, 'ru.s7.android:id/btnNext')and @text=\"Оплатить\"]")
-    private MobileElement payBtn; //кнопка Оплатить  */
+    private WebElement payBtn; //кнопка Оплатить  */
 
 
     String switchLocatorID = "ru.s7.android:id/agree";
@@ -104,7 +102,7 @@ public class SelectDadesAirTicketScreen extends BaseScreen {
 
     @Step("Тап в поле Дата вылета")
     public void clickDepartureDate() {
-        AndroidElement departureDate = (AndroidElement) driver.findElement(By.xpath("//android.widget.TextView[contains(@text,'" + getMonthNameFormatMMM() + "')]"));
+        WebElement departureDate = driver.findElement(By.xpath("//android.widget.TextView[contains(@text,'" + getMonthNameFormatMMM() + "')]"));
         departureDate.click();
         //departureDateField.click();
     }
@@ -160,8 +158,8 @@ public class SelectDadesAirTicketScreen extends BaseScreen {
         Swipes sp = new Swipes();
         sp.swipeUpToElement("//android.widget.RelativeLayout[@resource-id='ru.s7.android:id/btnChoosePaymentType']");
         methodsOfPaymentBtn.click();
-        MobileElement mobileElement = methodsOfPaymentList.get(1);
-        mobileElement.click();
+        WebElement WebElement = methodsOfPaymentList.get(1);
+        WebElement.click();
     }
 
     @Step("Заполняю поле CVV/CVC2")

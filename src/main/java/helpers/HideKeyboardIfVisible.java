@@ -2,20 +2,19 @@ package helpers;
 
 import base.BaseTest;
 import base.Driver;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 
 public class HideKeyboardIfVisible {
-    //private AndroidDriver driver= BaseTest.setUpDriver();
-    private AndroidDriver driver = Driver.getDriver();
+    private AppiumDriver driver = Driver.getDriver();
 
     private boolean isKeyboardShown;
 
     //метод закрывает клавиатуру если она открыта
     public void hideKeyboardIfVisible() {
-        isKeyboardShown = driver.isKeyboardShown();
+        // isKeyboardShown = driver.isKeyboardShown();
         if (isKeyboardShown = true) {
-            //driver.navigate().back();
-            driver.hideKeyboard();
+            driver.navigate().back();
         }
     }
 }

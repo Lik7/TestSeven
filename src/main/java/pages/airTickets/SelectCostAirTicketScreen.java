@@ -2,15 +2,12 @@ package pages.airTickets;
 
 import base.BaseScreen;
 import generalActions.pay.PayScreen;
-import helpers.Scroll;
-import helpers.Swipes;
-import helpers.Switch;
-import helpers.Waits;
-import io.appium.java_client.MobileElement;
+import helpers.*;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
@@ -25,34 +22,34 @@ public class SelectCostAirTicketScreen extends BaseScreen {
     }
 
     @AndroidFindBy(id = "ru.s7.android:id/rlBackground")
-    private MobileElement searchBtn;//кнопка Найти
+    private WebElement searchBtn;//кнопка Найти
 
     @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'₽')]")
-    private List<MobileElement> ticketBlock;//поле Билет
+    private List<WebElement> ticketBlock;//поле Билет
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Прямой']")
-    private List<MobileElement> ticketBlock2;//поле Билет
+    private List<WebElement> ticketBlock2;//поле Билет
 
     @AndroidFindBy(id = "ru.s7.android:id/btnNext")
-    private MobileElement nextBtn;//кнопка Далее
+    private WebElement nextBtn;//кнопка Далее
 
     @AndroidFindBy(id = "ru.s7.android:id/nameText")
-    private List<MobileElement> passengerNameField;//поле с именем пассажира
+    private List<WebElement> passengerNameField;//поле с именем пассажира
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='Оплатить сейчас']")
-    private MobileElement paymentTypePayNowBtn;//тип оплаты Оплатить сейчас
+    private WebElement paymentTypePayNowBtn;//тип оплаты Оплатить сейчас
 
     @AndroidFindBy(id = "ru.s7.android:id/btnChoosePaymentType")
-    private MobileElement methodsOfPaymentBtn;//кнопка Способы оплаты на экране Оплата
+    private WebElement methodsOfPaymentBtn;//кнопка Способы оплаты на экране Оплата
 
     @AndroidFindBy(id = "ru.s7.android:id/paymentCardName")
-    private List<MobileElement> methodsOfPaymentList;//список способов оплаты
+    private List<WebElement> methodsOfPaymentList;//список способов оплаты
 
     @AndroidFindBy(id = "ru.s7.android:id/etPaymentCardCVV")
-    private MobileElement CVVField;//поле CVV/CVC2
+    private WebElement CVVField;//поле CVV/CVC2
 
     @AndroidFindBy(xpath = "//android.widget.TextView[contains(@resource-id, 'ru.s7.android:id/btnNext')and @text=\"Оплатить\"]")
-    private MobileElement payBtn; //кнопка Оплатить
+    private WebElement payBtn; //кнопка Оплатить
 
     String switchLocatorID = "ru.s7.android:id/agree";
 
@@ -79,15 +76,15 @@ public class SelectCostAirTicketScreen extends BaseScreen {
     @Step("Выбираю способ оплаты")
     public PayScreen selectMethodOfPayment() {
         //Waits waits = new Waits();
-        if(Waits.elementIsDispXPathLocator("//android.widget.TextView[@text='Оплатить сейчас']")){
+        if(ElementIsMissing.elementIsDispXPathLocator("//android.widget.TextView[@text='Оплатить сейчас']")){
             paymentTypePayNowBtn.click();
         }
         return new PayScreen(driver);
         /*Swipes sp = new Swipes();
         sp.scrollToElementDown("//android.widget.RelativeLayout[@resource-id='ru.s7.android:id/btnChoosePaymentType']", 10);
         methodsOfPaymentBtn.click();
-        MobileElement mobileElement = methodsOfPaymentList.get(1);
-        mobileElement.click();*/
+        WebElement WebElement = methodsOfPaymentList.get(1);
+        WebElement.click();*/
     }
 
     @Step("Заполняю поле CVV/CVC2")

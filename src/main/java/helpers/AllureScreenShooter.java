@@ -2,10 +2,12 @@ package helpers;
 
 import base.BaseTest;
 import base.Driver;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.reporters.ExitCodeListener;
 
@@ -24,14 +26,15 @@ public class AllureScreenShooter extends ExitCodeListener {
     BaseTest bt = new BaseTest();
     public void onTestFailure(ITestResult testResult) {
         super.onTestFailure(testResult);
-        AndroidDriver driver = Driver.getDriver();
+        //AndroidDriver driver = Driver.getDriver();
+        AppiumDriver driver = Driver.getDriver();
         takePhoto(driver);
         logCaseStep(testResult);
         exceptedResult(testResult);
     }
 
     @Attachment(value = "Failed screenshots are as follows:", type = "image/png")
-    public byte[] takePhoto(AndroidDriver driver) {
+    public byte[] takePhoto(WebDriver driver) {
         byte[] screenshotAs = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         return screenshotAs;
     }

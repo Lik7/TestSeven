@@ -2,7 +2,6 @@ package helpers;
 
 import base.BaseScreen;
 import enums.Days;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,7 +13,7 @@ import java.util.List;
 public class DateSelected extends BaseScreen {
 
     @AndroidFindBy(id = "ru.s7.android:id/iv_calendar_item_icon")
-    private List<MobileElement> selectedDateIcon;
+    private List<WebElement> selectedDateIcon;
 
     //метод в календаре выбирает начальную дату
     public void tapDayStartInCalendar(Days days) {

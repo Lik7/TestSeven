@@ -26,9 +26,9 @@ public class AeroExpressTest extends BaseTest {
         dateSelected.tapDayFinishInCalendar(Days.IN_FIVE_DAYS);
         aeroExpressScreen.clickChoiceOfPassengersBtn();
         aeroExpressScreen.clickNextBtn();
-        //aeroExpressScreen.selectMethodOfPayment(1);
-        //aeroExpressScreen.fillPaymentDetails();
-        //aeroExpressScreen.fillCVVField();
+        aeroExpressScreen.selectMethodOfPayment(0);
+        aeroExpressScreen.fillPaymentDetails();
+        aeroExpressScreen.fillCVVField();
         aeroExpressScreen.onSwitchAgreeToTerms();
         aeroExpressScreen.tapPayBtn();
 

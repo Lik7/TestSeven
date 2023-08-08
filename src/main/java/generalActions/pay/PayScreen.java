@@ -3,6 +3,7 @@ package generalActions.pay;
 import helpers.Scroll;
 import helpers.Swipes;
 import helpers.Switch;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -14,9 +15,10 @@ import java.util.List;
 
 //заполнение экрана оплаты
 public class PayScreen {
-    AndroidDriver driver;
+    //AndroidDriver driver;
+    AppiumDriver driver;
 
-    public PayScreen(AndroidDriver driver) {
+    public PayScreen(AppiumDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
@@ -24,10 +26,10 @@ public class PayScreen {
     Swipes swipe = new Swipes();
 
     @AndroidFindBy(id = "ru.s7.android:id/btnChoosePaymentType")
-    private WebElement methodsOfPaymentBtn;//кнопка Способы оплаты на экране Оплата
+    private WebElement methodsOfPaymentBtn;//кнопка Способы оплаты /выбранная карта на экране Оплата
 
-    @AndroidFindBy(id = "ru.s7.android:id/paymentCardName")
-    private List<WebElement> methodsOfPaymentList;//список способов оплаты
+    @AndroidFindBy(id = "ru.s7.android:id/paymentMethodsView")
+    private List<WebElement> methodsOfPaymentList;//список способов оплаты в вспл. окне
 
     @AndroidFindBy(id = "ru.s7.android:id/etPaymentCardCVV")
     private WebElement CVVField;//поле CVV/CVC2
@@ -41,7 +43,7 @@ public class PayScreen {
     @Step("Выбираю способ оплаты банковской картой")
     public void selectMethodOfPaymentIsCard() {
         Scroll.scrollToElementDown("//android.widget.EditText[@resource-id='ru.s7.android:id/paymentCardName']", 3);
-        selectMethodOfPayment(1);
+        selectMethodOfPayment(0);
     }
 
     @Step("Заполняю поле CVV/CVC2")

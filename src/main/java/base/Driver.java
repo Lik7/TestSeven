@@ -16,7 +16,7 @@ public class Driver {
     private static AppiumDriver driver;
     private static String url = "http://127.0.0.1:4723/wd/hub";
     //private static String url = "http://127.0.0.1:4723/";
-    private static long waitSec = 30;
+    private static long waitSec = 25;
 
     private static void initDriver() {
         try {

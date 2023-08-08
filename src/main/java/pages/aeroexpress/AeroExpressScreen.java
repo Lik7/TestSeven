@@ -143,7 +143,7 @@ public class AeroExpressScreen extends BaseScreen {
 
     @Step("Заполняю реквизиты оплаты банковской картой")
     public void fillPaymentDetails(){
-        PayScreen payScreen = new PayScreen((AndroidDriver) driver);
+        PayScreen payScreen = new PayScreen(driver);
         payScreen.selectMethodOfPaymentIsCard();
         payScreen.fillCVVField();
         payScreen.onSwitchAgreeToTerms();

@@ -28,6 +28,7 @@ public class AppiumServerManager {
     }
 
     public static void stopServer() {
+       // stopServerCMD();
         if (serverIsRunning) {
             appiumLocalServer.stop();
             System.out.println("*** Appium server stopped");

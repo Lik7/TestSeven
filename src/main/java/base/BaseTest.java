@@ -34,7 +34,7 @@ public class BaseTest {
     public void setUpDriver() {
         //AppiumServer.startServer();
         //AppiumServer.startServerCMD();
-        //AppiumServerManager.stopServerCMD();
+        AppiumServerManager.stopServerCMD();
         AppiumServerManager.getAppiumLocalServer();
         driver = Driver.getDriver();
         homeScreen = new HomeScreen(driver);

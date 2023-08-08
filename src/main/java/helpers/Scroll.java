@@ -15,7 +15,7 @@ public class Scroll extends Swipes {
         scrollToElement(xPathLocator, countOfSwipes, true);
     }
 
-    //Скролл до элемена вверх
+    //Скролл до элемента вверх
     public void scrollToElementUp(String xPathLocator, int countOfSwipes) {
         scrollToElement(xPathLocator, countOfSwipes, false);
     }
@@ -92,6 +92,10 @@ public class Scroll extends Swipes {
         int i = driver.findElements(By.xpath(xPathLocator)).size();
         Driver.driverTimeoutDefault();
         return i;
+    }
+
+    private static void scrollEl (){
+
     }
 
 }

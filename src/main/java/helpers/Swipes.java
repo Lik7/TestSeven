@@ -47,9 +47,6 @@ public class Swipes {
 
     //Свайп по экрану вертикально
     private static void swipeVertical(double startPoint, double endPoint) {
-        //Actions action = new Actions(driver);
-        //ActionChains action = new ActionChains(driver);
-
         Dimension sizeScreen = driver.manage().window().getSize();//Получаем размер экрана
         int x = sizeScreen.width / 2;
         int start_Y = (int) (sizeScreen.height * startPoint); //Нач. точка в %-х экрана
@@ -58,17 +55,18 @@ public class Swipes {
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         Sequence sequence = new Sequence(finger, 1);
         sequence
-                .addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, start_Y))
+                /*.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, start_Y))
                 .addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
                 .addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, end_Y))
-                .addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+                .addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));*/
+
+  .addAction(finger.createPointerMove(Duration.ofMillis(0), PointerInput.Origin.viewport(), x, start_Y))
+                .addAction(finger.createPointerDown(0))
+                .addAction(finger.createPointerMove(Duration.ofMillis(500), PointerInput.Origin.viewport(), x, end_Y))
+                .addAction(finger.createPointerUp(0));
+
         driver.perform(Arrays.asList(sequence));
-        /*action
-                .press(point(x, start_Y))
-                .waitAction(waitOptions(ofMillis(900)))
-                .moveTo(point(x, end_Y))
-                .release()
-                .perform();*/
+
     }
 
     //Свайп справа налево по элементу (на высоте элемента)

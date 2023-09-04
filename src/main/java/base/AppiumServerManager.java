@@ -17,6 +17,7 @@ public class AppiumServerManager {
     private static boolean serverIsRunning = false;
 
     public static AppiumDriverLocalService getAppiumLocalServer() {
+        stopServerCMD();
         stopServer();
         if (!serverIsRunning) {
             startServer();

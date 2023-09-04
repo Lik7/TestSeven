@@ -24,14 +24,16 @@ public class Scroll extends Swipes {
     private static void scrollToElement(String xPathLocator, int countOfSwipes, boolean b) {
         int alreadySwiped = 0;//Кол-во сделанных свайпов
 
+        //int c;
         while (countDisplayOfElements(xPathLocator) == 0) {
-            if (alreadySwiped > countOfSwipes) {
-                return;
-            }
             if (b == true) {
                 swipeDown();
              } else swipeUp();
             ++alreadySwiped;
+            int c = countDisplayOfElements(xPathLocator);
+            if (c > 0 || alreadySwiped > countOfSwipes) {
+                return;
+            }
         }
     }
 
